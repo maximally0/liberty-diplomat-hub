@@ -30,17 +30,16 @@ const Index = () => {
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Host or Join Model UNs — Globally</span>
+              <span className="text-sm font-medium text-primary">70+ Countries · 1000+ Active Delegates</span>
             </div>
             
             <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-foreground">
-              The Future of
-              <span className="text-primary"> Diplomatic Education</span>
+              Join MUNs
+              <span className="text-primary"> across the world</span>
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Discover, host, and participate in Model United Nations conferences worldwide. 
-              Connect with delegates, manage events, and build your diplomatic portfolio.
+              Discover upcoming Model UNs, register as a delegate, and start debating — all in one place.
             </p>
 
             {/* Search Bar */}
@@ -151,9 +150,9 @@ const Index = () => {
       <section className="py-16 bg-muted/30 border-y border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold mb-4">Why ProjectLiberty?</h2>
+            <h2 className="font-display text-3xl font-bold mb-4">Why ProjectLiberty</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              A complete MUN operating system built for diplomacy, structure, and recognition
+              One platform for every kind of MUN.
             </p>
           </div>
 
@@ -166,7 +165,7 @@ const Index = () => {
               </div>
               <h3 className="font-display text-xl font-semibold mb-2">Verified Events</h3>
               <p className="text-muted-foreground">
-                All MUNs are verified by institutions. Secure registration and payment processing.
+                Every MUN on ProjectLiberty is verified and secure. No spam, no confusion — just real, trusted events.
               </p>
             </div>
 
@@ -178,7 +177,7 @@ const Index = () => {
               </div>
               <h3 className="font-display text-xl font-semibold mb-2">Digital Certificates</h3>
               <p className="text-muted-foreground">
-                Earn verified certificates and awards. Build your diplomatic portfolio with every event.
+                Get digital certificates and awards automatically after every event — linked directly to your profile.
               </p>
             </div>
 
@@ -190,7 +189,7 @@ const Index = () => {
               </div>
               <h3 className="font-display text-xl font-semibold mb-2">Global Network</h3>
               <p className="text-muted-foreground">
-                Connect with delegates and institutions from 78 countries. Join a growing community.
+                Join thousands of delegates from 70+ countries. Build your network, learn diplomacy, and grow with every MUN.
               </p>
             </div>
           </div>
@@ -204,21 +203,21 @@ const Index = () => {
             <div className="absolute inset-0 liberty-gradient opacity-5" />
             <div className="relative">
               <h2 className="font-display text-3xl font-bold mb-4">
-                Ready to Start Your Diplomatic Journey?
+                Ready to join your next MUN?
               </h2>
               <p className="text-muted-foreground mb-8">
-                Join thousands of delegates and organizers using ProjectLiberty to host and participate in MUNs worldwide.
+                Browse events, register, and start your delegate journey today.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/auth">
+                <Link to="/browse">
                   <Button size="lg" className="gap-2">
-                    Get Started Free
+                    Find MUNs
                     <ArrowRight className="h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="/browse">
+                <Link to="/auth">
                   <Button size="lg" variant="outline">
-                    Explore Events
+                    Sign Up Free
                   </Button>
                 </Link>
               </div>
