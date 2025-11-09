@@ -9,10 +9,15 @@ import {
   ArrowRight,
   Sparkles,
   Shield,
-  Trophy
+  Trophy,
+  Zap,
+  Heart,
+  Star
 } from "lucide-react";
 import { mockStats } from "@/lib/mockData";
 import { useEffect, useState } from "react";
+import { FloatingBlobs } from "@/components/FloatingBlobs";
+import { CursorTrail } from "@/components/CursorTrail";
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -24,88 +29,137 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-noir-black text-white film-grain overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-playful-lavender via-white to-playful-sky overflow-hidden relative">
+      <CursorTrail />
+      <FloatingBlobs />
       <Navigation />
 
-      {/* Hero Section - Cinematic */}
+      {/* Hero Section - Playful Techcore */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Spotlight Effect */}
-        <div className="spotlight-effect"></div>
-        
-        {/* Animated Background Lines */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-noir-gold to-transparent"></div>
-          <div className="absolute top-2/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-noir-crimson to-transparent"></div>
-          <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-noir-gold to-transparent"></div>
-        </div>
-
         <div className="container mx-auto px-4 py-32 relative z-10">
           <div 
-            className="max-w-6xl mx-auto text-center parallax-text"
-            style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+            className="max-w-6xl mx-auto text-center"
+            style={{ transform: `translateY(${scrollY * 0.2}px)` }}
           >
-            {/* Overline */}
-            <div className="cinematic-fade-in mb-8" style={{ animationDelay: '0.2s' }}>
-              <div className="inline-flex items-center gap-3 px-6 py-3 border border-noir-gold/30 bg-noir-gold/5 backdrop-blur-sm">
-                <Sparkles className="h-4 w-4 text-noir-gold animate-pulse" />
-                <span className="text-sm font-display tracking-widest text-noir-gold uppercase">
+            {/* Floating Badge */}
+            <div className="mb-8 animate-bounce-soft inline-block">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-playful-purple/20 to-playful-pink/20 backdrop-blur-lg border-2 border-playful-purple/30 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Sparkles className="h-5 w-5 text-playful-purple animate-wiggle" />
+                <span className="text-sm font-bold tracking-wide bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent">
                   70+ Countries · 1000+ Active Delegates
                 </span>
+                <Star className="h-4 w-4 text-playful-pink animate-pulse" />
               </div>
             </div>
             
-            {/* Main Headline */}
-            <h1 
-              className="font-display text-7xl md:text-9xl font-bold mb-12 leading-none cinematic-fade-in"
-              style={{ animationDelay: '0.4s' }}
-            >
-              <span className="block text-white letter-spacing-wide">THE</span>
-              <span className="block text-noir-gold noir-glow tracking-wide">LIBERTY</span>
-              <span className="block text-white/90 text-5xl md:text-7xl mt-6 font-serif italic">
-                Discourse
+            {/* Main Headline with Gradient */}
+            <h1 className="font-display text-6xl md:text-8xl font-extrabold mb-8 leading-tight">
+              <span className="block bg-gradient-to-r from-playful-purple via-playful-pink to-playful-blue bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
+                Welcome to
+              </span>
+              <span className="block text-7xl md:text-9xl bg-gradient-to-r from-playful-cyan via-playful-blue to-playful-purple bg-clip-text text-transparent mt-4 animate-gradient-x bg-[length:200%_auto] drop-shadow-2xl">
+                LIBERTY
+              </span>
+              <span className="block text-4xl md:text-6xl mt-6 bg-gradient-to-r from-playful-orange via-playful-yellow to-playful-lime bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
+                Where Ideas Come Alive
               </span>
             </h1>
             
             {/* Subtitle */}
-            <p 
-              className="text-xl md:text-2xl text-white/70 mb-16 max-w-3xl mx-auto font-serif leading-relaxed cinematic-fade-in"
-              style={{ animationDelay: '0.6s' }}
-            >
-              Where nations converge, ideas clash, and history unfolds.
+            <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
+              Join thousands of delegates from around the world in the most vibrant MUN platform. 
               <br />
-              <span className="text-noir-gold/80">Enter the chamber of global discourse.</span>
+              <span className="bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent font-bold">
+                Let's make diplomacy fun again!
+              </span>
             </p>
 
-            {/* CTA Buttons */}
-            <div 
-              className="flex flex-col sm:flex-row gap-6 justify-center mb-20 cinematic-fade-in"
-              style={{ animationDelay: '0.8s' }}
-            >
+            {/* CTA Buttons with 3D effect */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
               <Link to="/browse">
                 <Button 
                   size="lg" 
-                  className="bg-noir-gold text-noir-black hover:bg-noir-gold/90 h-14 px-10 text-base font-display tracking-wider uppercase border-2 border-noir-gold transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)]"
+                  className="relative group bg-gradient-to-r from-playful-purple to-playful-pink text-white hover:shadow-2xl h-16 px-12 text-lg font-bold rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1 shadow-lg overflow-hidden"
                 >
-                  Explore Events
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    Explore Events
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-playful-pink to-playful-purple opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </Link>
               <Link to="/auth">
                 <Button 
                   size="lg" 
-                  variant="outline" 
-                  className="border-2 border-white/30 text-white hover:bg-white/10 h-14 px-10 text-base font-display tracking-wider uppercase backdrop-blur-sm transition-all duration-300"
+                  className="relative group bg-white text-playful-purple hover:shadow-2xl h-16 px-12 text-lg font-bold rounded-full border-4 border-playful-purple/30 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:border-playful-pink/50"
                 >
-                  Join the Discourse
+                  <span className="flex items-center gap-2 bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent">
+                    Join the Fun
+                    <Heart className="h-5 w-5 text-playful-pink group-hover:animate-bounce-soft" />
+                  </span>
                 </Button>
               </Link>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="cinematic-fade-in" style={{ animationDelay: '1s' }}>
-              <div className="inline-block animate-bounce">
-                <div className="w-6 h-10 border-2 border-white/30 rounded-full p-1">
-                  <div className="w-1 h-3 bg-noir-gold rounded-full mx-auto animate-pulse"></div>
+            {/* Fun Scroll Indicator */}
+            <div className="animate-bounce-soft">
+              <div className="inline-flex flex-col items-center gap-2">
+                <div className="w-8 h-12 rounded-full bg-gradient-to-b from-playful-purple/30 to-playful-pink/30 border-3 border-playful-purple/50 p-1 backdrop-blur-sm">
+                  <div className="w-2 h-3 bg-gradient-to-b from-playful-purple to-playful-pink rounded-full mx-auto animate-pulse" />
+                </div>
+                <span className="text-xs font-medium text-playful-purple">Scroll for more</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating 3D Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-playful-yellow to-playful-orange rounded-3xl animate-float shadow-2xl opacity-80 rotate-12" />
+        <div className="absolute bottom-32 right-20 w-16 h-16 bg-gradient-to-br from-playful-cyan to-playful-blue rounded-full animate-float-slow shadow-2xl opacity-80" />
+        <div className="absolute top-1/2 right-10 w-12 h-12 bg-gradient-to-br from-playful-pink to-playful-purple rounded-2xl animate-blob shadow-xl opacity-80" />
+      </section>
+
+      {/* Stats Section - Playful Cards */}
+      <section className="relative py-24 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="text-center group cursor-default">
+              <div className="bg-gradient-to-br from-playful-purple to-playful-pink p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-rotate-2">
+                <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
+                  {mockStats.totalMUNs}
+                </div>
+                <div className="text-sm text-white/90 font-semibold tracking-wide">
+                  Events
+                </div>
+              </div>
+            </div>
+            <div className="text-center group cursor-default">
+              <div className="bg-gradient-to-br from-playful-cyan to-playful-blue p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-2">
+                <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
+                  {mockStats.totalDelegates.toLocaleString()}
+                </div>
+                <div className="text-sm text-white/90 font-semibold tracking-wide">
+                  Delegates
+                </div>
+              </div>
+            </div>
+            <div className="text-center group cursor-default">
+              <div className="bg-gradient-to-br from-playful-yellow to-playful-orange p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-rotate-2">
+                <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
+                  {mockStats.totalInstitutions}
+                </div>
+                <div className="text-sm text-white/90 font-semibold tracking-wide">
+                  Institutions
+                </div>
+              </div>
+            </div>
+            <div className="text-center group cursor-default">
+              <div className="bg-gradient-to-br from-playful-mint to-playful-lime p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-2">
+                <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
+                  {mockStats.countriesRepresented}
+                </div>
+                <div className="text-sm text-white/90 font-semibold tracking-wide">
+                  Nations
                 </div>
               </div>
             </div>
@@ -113,177 +167,168 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section - Minimalist */}
-      <section className="relative py-24 border-y border-white/10 bg-gradient-to-b from-noir-black to-noir-gray">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16">
-            <div className="text-center group cursor-default cinematic-fade-in">
-              <div className="text-6xl md:text-7xl font-display text-noir-gold mb-3 transition-all duration-500 group-hover:scale-110">
-                {mockStats.totalMUNs}
-              </div>
-              <div className="text-sm text-white/50 uppercase tracking-widest font-display">
-                Total Events
-              </div>
-            </div>
-            <div className="text-center group cursor-default cinematic-fade-in" style={{ animationDelay: '0.1s' }}>
-              <div className="text-6xl md:text-7xl font-display text-white mb-3 transition-all duration-500 group-hover:scale-110">
-                {mockStats.totalDelegates.toLocaleString()}
-              </div>
-              <div className="text-sm text-white/50 uppercase tracking-widest font-display">
-                Delegates
-              </div>
-            </div>
-            <div className="text-center group cursor-default cinematic-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="text-6xl md:text-7xl font-display text-noir-gold mb-3 transition-all duration-500 group-hover:scale-110">
-                {mockStats.totalInstitutions}
-              </div>
-              <div className="text-sm text-white/50 uppercase tracking-widest font-display">
-                Institutions
-              </div>
-            </div>
-            <div className="text-center group cursor-default cinematic-fade-in" style={{ animationDelay: '0.3s' }}>
-              <div className="text-6xl md:text-7xl font-display text-white mb-3 transition-all duration-500 group-hover:scale-110">
-                {mockStats.countriesRepresented}
-              </div>
-              <div className="text-sm text-white/50 uppercase tracking-widest font-display">
-                Nations
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Cinematic Cards */}
-      <section className="relative py-32 bg-noir-black">
+      {/* Features Section - Bubbly Cards */}
+      <section className="relative py-32 bg-gradient-to-b from-white via-playful-lavender/20 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h2 className="font-display text-5xl md:text-6xl font-bold mb-6 text-white tracking-wide">
-              THE <span className="text-noir-gold">TRINITY</span>
+            <h2 className="font-display text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-playful-purple via-playful-pink to-playful-blue bg-clip-text text-transparent">
+              Why You'll Love It Here
             </h2>
-            <p className="text-white/60 max-w-2xl mx-auto text-lg font-serif italic">
-              Three pillars upon which the discourse stands
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg font-medium">
+              Three amazing features that make Liberty special
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Card 1 */}
-            <div className="group relative overflow-hidden border border-white/10 bg-gradient-to-b from-noir-gray/50 to-noir-black p-10 transition-all duration-500 hover:border-noir-gold/50 hover:shadow-[0_0_50px_rgba(212,175,55,0.2)]">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-noir-gold/5 rounded-full blur-3xl transition-all duration-500 group-hover:bg-noir-gold/10"></div>
+            {/* Card 1 - Verified */}
+            <div className="group relative overflow-hidden rounded-3xl bg-white p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-rotate-1">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-playful-purple/20 to-playful-pink/20 rounded-full blur-2xl transition-all duration-500 group-hover:scale-150"></div>
               <div className="relative z-10">
-                <Shield className="h-12 w-12 text-noir-gold mb-6 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="font-display text-2xl font-semibold mb-4 text-white tracking-wide">
-                  VERIFIED
+                <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-playful-purple to-playful-pink shadow-lg mb-6 group-hover:animate-bounce-soft">
+                  <Shield className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="font-display text-2xl font-bold mb-4 text-gray-800">
+                  Verified Events
                 </h3>
-                <p className="text-white/70 leading-relaxed">
-                  Every discourse vetted. Every event authentic. No pretense, no confusion—only truth.
+                <p className="text-gray-600 leading-relaxed">
+                  Every event is carefully vetted and authentic. Join with confidence knowing you're in the right place!
                 </p>
               </div>
+              <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-playful-purple to-playful-pink transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl" />
             </div>
 
-            {/* Card 2 */}
-            <div className="group relative overflow-hidden border border-white/10 bg-gradient-to-b from-noir-gray/50 to-noir-black p-10 transition-all duration-500 hover:border-noir-gold/50 hover:shadow-[0_0_50px_rgba(212,175,55,0.2)]">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-noir-crimson/5 rounded-full blur-3xl transition-all duration-500 group-hover:bg-noir-crimson/10"></div>
+            {/* Card 2 - Achievements */}
+            <div className="group relative overflow-hidden rounded-3xl bg-white p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-playful-cyan/20 to-playful-blue/20 rounded-full blur-2xl transition-all duration-500 group-hover:scale-150"></div>
               <div className="relative z-10">
-                <Trophy className="h-12 w-12 text-noir-gold mb-6 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="font-display text-2xl font-semibold mb-4 text-white tracking-wide">
-                  LAURELS
+                <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-playful-cyan to-playful-blue shadow-lg mb-6 group-hover:animate-bounce-soft">
+                  <Trophy className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="font-display text-2xl font-bold mb-4 text-gray-800">
+                  Digital Achievements
                 </h3>
-                <p className="text-white/70 leading-relaxed">
-                  Digital honors, forever etched. Your achievements immortalized in the eternal ledger.
+                <p className="text-gray-600 leading-relaxed">
+                  Earn badges, collect honors, and showcase your diplomatic excellence to the world!
                 </p>
               </div>
+              <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-playful-cyan to-playful-blue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl" />
             </div>
 
-            {/* Card 3 */}
-            <div className="group relative overflow-hidden border border-white/10 bg-gradient-to-b from-noir-gray/50 to-noir-black p-10 transition-all duration-500 hover:border-noir-gold/50 hover:shadow-[0_0_50px_rgba(212,175,55,0.2)]">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-noir-gold/5 rounded-full blur-3xl transition-all duration-500 group-hover:bg-noir-gold/10"></div>
+            {/* Card 3 - Global Community */}
+            <div className="group relative overflow-hidden rounded-3xl bg-white p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:rotate-1">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-playful-yellow/20 to-playful-orange/20 rounded-full blur-2xl transition-all duration-500 group-hover:scale-150"></div>
               <div className="relative z-10">
-                <Globe className="h-12 w-12 text-noir-gold mb-6 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="font-display text-2xl font-semibold mb-4 text-white tracking-wide">
-                  ASSEMBLY
+                <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-playful-yellow to-playful-orange shadow-lg mb-6 group-hover:animate-bounce-soft">
+                  <Globe className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="font-display text-2xl font-bold mb-4 text-gray-800">
+                  Global Community
                 </h3>
-                <p className="text-white/70 leading-relaxed">
-                  Seventy nations. Thousands united. A fellowship forged in the fires of debate.
+                <p className="text-gray-600 leading-relaxed">
+                  Connect with thousands of delegates from 70+ countries. Make friends, share ideas, grow together!
                 </p>
               </div>
+              <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-playful-yellow to-playful-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Dramatic */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Dramatic Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-noir-black via-noir-gray to-noir-black"></div>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-noir-gold/20 rounded-full blur-[120px] animate-pulse"></div>
+      {/* CTA Section - Energetic */}
+      <section className="relative py-40 overflow-hidden bg-gradient-to-br from-playful-purple via-playful-pink to-playful-blue">
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-white/20 rounded-full blur-3xl animate-blob" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-6xl md:text-7xl font-bold mb-8 text-white tracking-wide leading-tight">
-              YOUR STORY
+            <div className="inline-flex items-center gap-2 mb-6 animate-bounce-soft">
+              <Zap className="h-8 w-8 text-yellow-300 animate-pulse" />
+              <Star className="h-6 w-6 text-yellow-200 animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <Sparkles className="h-7 w-7 text-yellow-300 animate-pulse" style={{ animationDelay: '0.4s' }} />
+            </div>
+            
+            <h2 className="font-display text-5xl md:text-7xl font-extrabold mb-8 text-white leading-tight drop-shadow-2xl">
+              Ready to Start Your
               <br />
-              <span className="text-noir-gold noir-glow">AWAITS</span>
+              <span className="text-6xl md:text-8xl">Adventure?</span>
             </h2>
-            <p className="text-xl text-white/70 mb-12 font-serif italic max-w-2xl mx-auto">
-              Step into the arena. Make your mark. Let history remember your voice.
+            
+            <p className="text-xl md:text-2xl text-white/90 mb-12 font-semibold max-w-2xl mx-auto drop-shadow-lg">
+              Join thousands of delegates making a difference. Your voice matters, your ideas count!
             </p>
+            
             <Link to="/browse">
               <Button 
                 size="lg" 
-                className="bg-noir-gold text-noir-black hover:bg-noir-gold/90 h-16 px-12 text-lg font-display tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)]"
+                className="relative group bg-white text-playful-purple hover:shadow-2xl h-20 px-16 text-xl font-bold rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-2xl"
               >
-                Begin Your Journey
-                <ArrowRight className="ml-3 h-6 w-6" />
+                <span className="relative z-10 flex items-center gap-3">
+                  Let's Go!
+                  <ArrowRight className="h-6 w-6 group-hover:translate-x-3 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-playful-yellow to-playful-orange opacity-0 group-hover:opacity-20 rounded-full transition-opacity" />
               </Button>
             </Link>
+            
+            <p className="mt-8 text-white/80 text-sm font-medium">
+              Free to join • No credit card required • Start in seconds
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Footer - Minimal Noir */}
-      <footer className="relative border-t border-white/10 bg-noir-black">
-        <div className="container mx-auto px-4 py-16">
+      {/* Footer - Playful */}
+      <footer className="relative bg-gradient-to-br from-playful-lavender via-white to-playful-sky pt-20 pb-8">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <Globe className="h-6 w-6 text-noir-gold" />
-                <span className="font-display text-xl font-bold text-white tracking-wide">LIBERTY</span>
+                <div className="p-2 rounded-xl bg-gradient-to-br from-playful-purple to-playful-pink">
+                  <Globe className="h-6 w-6 text-white" />
+                </div>
+                <span className="font-display text-2xl font-extrabold bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent">LIBERTY</span>
               </div>
-              <p className="text-sm text-white/50 leading-relaxed">
-                The stage for diplomatic excellence.
+              <p className="text-sm text-gray-600 leading-relaxed font-medium">
+                Making diplomacy fun and accessible for everyone!
               </p>
             </div>
             <div>
-              <h4 className="font-display text-sm font-semibold mb-4 text-white/90 tracking-widest uppercase">Platform</h4>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><Link to="/browse" className="hover:text-noir-gold transition-colors">Browse Events</Link></li>
-                <li><Link to="/leaderboard" className="hover:text-noir-gold transition-colors">Leaderboard</Link></li>
-                <li><Link to="/resources" className="hover:text-noir-gold transition-colors">Resources</Link></li>
+              <h4 className="font-display text-sm font-bold mb-4 text-playful-purple">Platform</h4>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li><Link to="/browse" className="hover:text-playful-pink transition-colors font-medium hover:translate-x-1 inline-block">Browse Events</Link></li>
+                <li><Link to="/leaderboard" className="hover:text-playful-pink transition-colors font-medium hover:translate-x-1 inline-block">Leaderboard</Link></li>
+                <li><Link to="/resources" className="hover:text-playful-pink transition-colors font-medium hover:translate-x-1 inline-block">Resources</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-display text-sm font-semibold mb-4 text-white/90 tracking-widest uppercase">Support</h4>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><a href="#" className="hover:text-noir-gold transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-noir-gold transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-noir-gold transition-colors">Guidelines</a></li>
+              <h4 className="font-display text-sm font-bold mb-4 text-playful-blue">Support</h4>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-playful-cyan transition-colors font-medium hover:translate-x-1 inline-block">Help Center</a></li>
+                <li><a href="#" className="hover:text-playful-cyan transition-colors font-medium hover:translate-x-1 inline-block">Contact</a></li>
+                <li><a href="#" className="hover:text-playful-cyan transition-colors font-medium hover:translate-x-1 inline-block">Guidelines</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-display text-sm font-semibold mb-4 text-white/90 tracking-widest uppercase">Company</h4>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><a href="#" className="hover:text-noir-gold transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-noir-gold transition-colors">Partners</a></li>
-                <li><a href="#" className="hover:text-noir-gold transition-colors">Careers</a></li>
+              <h4 className="font-display text-sm font-bold mb-4 text-playful-orange">Company</h4>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-playful-yellow transition-colors font-medium hover:translate-x-1 inline-block">About</a></li>
+                <li><a href="#" className="hover:text-playful-yellow transition-colors font-medium hover:translate-x-1 inline-block">Partners</a></li>
+                <li><a href="#" className="hover:text-playful-yellow transition-colors font-medium hover:translate-x-1 inline-block">Careers</a></li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-white/10 text-center text-sm text-white/40 font-display tracking-wide">
-            <p>© 2025 LIBERTY. ALL RIGHTS RESERVED.</p>
-            <p className="mt-2 text-white/30">
-              AN INITIATIVE BY <span className="text-noir-gold font-semibold tracking-wider">MAXIMALLY</span>
+          <div className="pt-8 border-t-2 border-playful-lavender text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Heart className="h-4 w-4 text-playful-pink animate-pulse" />
+              <p className="text-sm text-gray-600 font-semibold">Made with love for the MUN community</p>
+              <Heart className="h-4 w-4 text-playful-pink animate-pulse" />
+            </div>
+            <p className="text-xs text-gray-500 font-medium">© 2025 LIBERTY. All rights reserved.</p>
+            <p className="mt-2 text-xs text-gray-400">
+              An initiative by <span className="bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent font-bold">MAXIMALLY</span>
             </p>
           </div>
         </div>
