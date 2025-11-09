@@ -17,7 +17,7 @@ export function log(message: string) {
   console.log(`${formattedTime} [express] ${message}`);
 }
 
-export async function setupVite(app: Express) {
+export async function setupVite(app: Express): Promise<Express> {
   const vite = await createViteServer({
     server: { middlewareMode: true },
     appType: "spa",
@@ -28,7 +28,7 @@ export async function setupVite(app: Express) {
   return app;
 }
 
-export function serveStatic(app: Express) {
+export function serveStatic(app: Express): Express {
   const distPath = path.resolve(__dirname, "..", "dist", "public");
 
   if (!fs.existsSync(distPath)) {
@@ -42,4 +42,6 @@ export function serveStatic(app: Express) {
   app.use("*", (_req, res) => {
     res.sendFile(path.resolve(distPath, "index.html"));
   });
+
+  return app;
 }
