@@ -55,7 +55,7 @@ const Auth = () => {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
                   <Globe className="h-7 w-7" />
                 </div>
-                <span className="font-display text-2xl font-bold">ProjectLiberty</span>
+                <span className="font-display text-2xl font-bold">Liberty</span>
               </Link>
               
               <h2 className="font-display text-4xl font-bold mb-4">

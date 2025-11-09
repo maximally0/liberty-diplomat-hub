@@ -68,7 +68,7 @@ export const Navigation = () => {
           <Link to="/" className="flex items-center space-x-2 group">
             <Globe className="h-5 w-5 text-[#0A0A0A]" />
             <span className="font-semibold text-[#0A0A0A]">
-              ProjectLiberty
+              Liberty
             </span>
           </Link>
 

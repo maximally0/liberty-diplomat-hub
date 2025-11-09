@@ -150,7 +150,7 @@ const Index = () => {
       <section className="py-16 bg-muted/30 border-y border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold mb-4">Why ProjectLiberty</h2>
+            <h2 className="font-display text-3xl font-bold mb-4">Why Liberty</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               One platform for every kind of MUN.
             </p>
@@ -165,7 +165,7 @@ const Index = () => {
               </div>
               <h3 className="font-display text-xl font-semibold mb-2">Verified Events</h3>
               <p className="text-muted-foreground">
-                Every MUN on ProjectLiberty is verified and secure. No spam, no confusion — just real, trusted events.
+                Every MUN on Liberty is verified and secure. No spam, no confusion — just real, trusted events.
               </p>
             </div>
 
@@ -233,7 +233,7 @@ const Index = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Globe className="h-6 w-6 text-primary" />
-                <span className="font-display text-lg font-bold">ProjectLiberty</span>
+                <span className="font-display text-lg font-bold">Liberty</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 The global platform for Model United Nations conferences.
@@ -265,7 +265,8 @@ const Index = () => {
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2025 ProjectLiberty. All rights reserved.</p>
+            <p>© 2025 Liberty. All rights reserved.</p>
+            <p className="mt-2">An initiative by <span className="font-semibold">maximally</span></p>
           </div>
         </div>
       </footer>

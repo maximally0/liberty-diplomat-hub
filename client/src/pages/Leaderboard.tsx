@@ -66,7 +66,7 @@ const Leaderboard = () => {
         <div className="mb-8">
           <h1 className="font-display text-4xl font-bold mb-2">Global Leaderboard</h1>
           <p className="text-muted-foreground">
-            Top performers in the ProjectLiberty community
+            Top performers in the Liberty community
           </p>
         </div>
 
