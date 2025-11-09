@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { CountryMatrix } from "@/components/CountryMatrix";
 import { AnnouncementsFeed } from "@/components/AnnouncementsFeed";
+import { RegistrationWizard } from "@/components/registration/RegistrationWizard";
+import { ProfileCaptureModal } from "@/components/registration/ProfileCaptureModal";
+import { useRegistration } from "@/hooks/useRegistration";
 import { 
   Calendar, 
   MapPin, 
@@ -25,6 +29,11 @@ import { mockMUNs, mockDelegates } from "@/lib/mockData";
 const MUNEvent = () => {
   const { id } = useParams();
   const mun = mockMUNs.find(m => m.id === id);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showRegistrationWizard, setShowRegistrationWizard] = useState(false);
+  const { currentUser, saveUser, addRegistration, getUserRegistration } = useRegistration();
+  
+  const existingRegistration = getUserRegistration(id || '');
 
   if (!mun) {
     return (
@@ -121,9 +130,74 @@ const MUNEvent = () => {
                 </div>
               </div>
             </div>
+
+            <div className="mt-6">
+              {existingRegistration ? (
+                <Card className="p-4 bg-green-50 border-green-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-semibold mb-1">Registration Status</div>
+                      <div className="text-sm">
+                        {existingRegistration.status === 'confirmed' && '✓ Confirmed and Paid'}
+                        {existingRegistration.status === 'pending_payment' && '⏳ Pending Payment (Complete within 72 hours)'}
+                        {existingRegistration.status === 'pending_invoice' && '📄 Invoice Requested'}
+                      </div>
+                    </div>
+                    <Badge variant={existingRegistration.status === 'confirmed' ? 'default' : 'secondary'}>
+                      {existingRegistration.status.replace('_', ' ').toUpperCase()}
+                    </Badge>
+                  </div>
+                </Card>
+              ) : (
+                <Button
+                  size="lg"
+                  className="w-full md:w-auto"
+                  onClick={() => {
+                    if (!currentUser) {
+                      setShowProfileModal(true);
+                    } else {
+                      setShowRegistrationWizard(true);
+                    }
+                  }}
+                >
+                  Register for This Event
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Registration Modals */}
+      {showProfileModal && (
+        <ProfileCaptureModal
+          open={showProfileModal}
+          onClose={() => setShowProfileModal(false)}
+          onSubmit={(data) => {
+            const newUser = {
+              id: `user-${Date.now()}`,
+              ...data,
+            };
+            saveUser(newUser);
+            setShowProfileModal(false);
+            setShowRegistrationWizard(true);
+          }}
+        />
+      )}
+
+      {showRegistrationWizard && currentUser && (
+        <RegistrationWizard
+          open={showRegistrationWizard}
+          onClose={() => setShowRegistrationWizard(false)}
+          munId={id || ''}
+          userId={currentUser.id}
+          userProfile={currentUser}
+          onRegistrationComplete={(registration) => {
+            addRegistration(registration);
+            setShowRegistrationWizard(false);
+          }}
+        />
+      )}
 
       {/* Content */}
       <div className="container mx-auto px-4 py-8">

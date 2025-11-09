@@ -1,0 +1,44 @@
+[
+  {
+    "id": "u1",
+    "name": "Aarav Mehta",
+    "email": "aarav@example.com",
+    "country": "India",
+    "city": "Mumbai",
+    "institution": "St. Xavier's School",
+    "grade": "11th Grade",
+    "phone": "+91-9876543210",
+    "bio": "Passionate about international relations and sustainable development",
+    "experience": "Intermediate",
+    "acceptedCodeOfConduct": true,
+    "createdAt": "2025-11-01T10:00:00Z"
+  },
+  {
+    "id": "u2",
+    "name": "Emily Johnson",
+    "email": "emily.j@example.com",
+    "country": "United States",
+    "city": "New York",
+    "institution": "Manhattan High School",
+    "grade": "12th Grade",
+    "phone": "+1-555-0123",
+    "bio": "Aspiring diplomat with interest in human rights",
+    "experience": "Advanced",
+    "acceptedCodeOfConduct": true,
+    "createdAt": "2025-11-02T14:30:00Z"
+  },
+  {
+    "id": "u3",
+    "name": "Yuki Tanaka",
+    "email": "yuki.t@example.com",
+    "country": "Japan",
+    "city": "Tokyo",
+    "institution": "Tokyo International School",
+    "grade": "10th Grade",
+    "phone": "+81-90-1234-5678",
+    "bio": "First-time MUN delegate eager to learn",
+    "experience": "Beginner",
+    "acceptedCodeOfConduct": true,
+    "createdAt": "2025-11-03T08:15:00Z"
+  }
+]

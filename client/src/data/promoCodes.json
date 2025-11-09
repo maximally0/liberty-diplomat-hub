@@ -1,0 +1,30 @@
+[
+  {
+    "code": "PLFREE50",
+    "discount": 50,
+    "type": "percentage",
+    "description": "50% off registration fee",
+    "active": true
+  },
+  {
+    "code": "STUDENT10",
+    "discount": 10,
+    "type": "percentage",
+    "description": "10% student discount",
+    "active": true
+  },
+  {
+    "code": "EARLY25",
+    "discount": 25,
+    "type": "percentage",
+    "description": "Early bird 25% discount",
+    "active": true
+  },
+  {
+    "code": "FIRST5",
+    "discount": 5,
+    "type": "fixed",
+    "description": "$5 off for first-time delegates",
+    "active": false
+  }
+]

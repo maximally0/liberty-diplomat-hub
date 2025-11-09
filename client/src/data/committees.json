@@ -1,0 +1,150 @@
+[
+  {
+    "id": "c1",
+    "munId": "mun-global-2026",
+    "name": "UNSC",
+    "fullName": "United Nations Security Council",
+    "agenda": "Addressing Regional Conflicts and International Peace",
+    "capacity": 30,
+    "filled": 28,
+    "requiresPaper": true,
+    "difficulty": "Advanced",
+    "chairs": [
+      {
+        "name": "Sarah Chen",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+      },
+      {
+        "name": "Marcus Williams",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus"
+      }
+    ]
+  },
+  {
+    "id": "c2",
+    "munId": "mun-global-2026",
+    "name": "UNGA",
+    "fullName": "United Nations General Assembly",
+    "agenda": "Sustainable Development Goals Progress Review",
+    "capacity": 50,
+    "filled": 35,
+    "requiresPaper": false,
+    "difficulty": "Beginner",
+    "chairs": [
+      {
+        "name": "Aisha Patel",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha"
+      }
+    ]
+  },
+  {
+    "id": "c3",
+    "munId": "mun-global-2026",
+    "name": "UNHRC",
+    "fullName": "UN Human Rights Council",
+    "agenda": "Protection of Digital Rights and Privacy",
+    "capacity": 40,
+    "filled": 40,
+    "requiresPaper": true,
+    "difficulty": "Intermediate",
+    "chairs": [
+      {
+        "name": "Liu Wei",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Liu"
+      },
+      {
+        "name": "Emma Johnson",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma"
+      }
+    ]
+  },
+  {
+    "id": "c4",
+    "munId": "mun-global-2026",
+    "name": "ECOSOC",
+    "fullName": "Economic and Social Council",
+    "agenda": "Global Economic Recovery Post-Pandemic",
+    "capacity": 45,
+    "filled": 20,
+    "requiresPaper": false,
+    "difficulty": "Intermediate",
+    "chairs": [
+      {
+        "name": "Diego Rodriguez",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Diego"
+      }
+    ]
+  },
+  {
+    "id": "c5",
+    "munId": "mun-global-2026",
+    "name": "CRISIS",
+    "fullName": "Crisis Committee - Cybersecurity Threats",
+    "agenda": "Responding to Global Cyber Attacks",
+    "capacity": 25,
+    "filled": 24,
+    "requiresPaper": true,
+    "difficulty": "Advanced",
+    "chairs": [
+      {
+        "name": "Yuki Tanaka",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Yuki"
+      },
+      {
+        "name": "Alex Kumar",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+      }
+    ]
+  },
+  {
+    "id": "c6",
+    "munId": "summit-asia-2026",
+    "name": "ASEAN",
+    "fullName": "Association of Southeast Asian Nations",
+    "agenda": "Regional Trade and Economic Integration",
+    "capacity": 30,
+    "filled": 15,
+    "requiresPaper": false,
+    "difficulty": "Intermediate",
+    "chairs": [
+      {
+        "name": "Priya Singh",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya"
+      }
+    ]
+  },
+  {
+    "id": "c7",
+    "munId": "summit-asia-2026",
+    "name": "WHO",
+    "fullName": "World Health Organization",
+    "agenda": "Pandemic Preparedness and Response",
+    "capacity": 35,
+    "filled": 30,
+    "requiresPaper": true,
+    "difficulty": "Advanced",
+    "chairs": [
+      {
+        "name": "Dr. James Park",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=James"
+      }
+    ]
+  },
+  {
+    "id": "c8",
+    "munId": "summit-asia-2026",
+    "name": "IAEA",
+    "fullName": "International Atomic Energy Agency",
+    "agenda": "Nuclear Energy and Non-Proliferation",
+    "capacity": 28,
+    "filled": 10,
+    "requiresPaper": true,
+    "difficulty": "Advanced",
+    "chairs": [
+      {
+        "name": "Sofia Martinez",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sofia"
+      }
+    ]
+  }
+]

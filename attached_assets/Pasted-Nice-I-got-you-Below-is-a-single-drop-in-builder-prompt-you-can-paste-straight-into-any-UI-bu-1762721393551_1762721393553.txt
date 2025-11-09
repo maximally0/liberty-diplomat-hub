@@ -1,0 +1,300 @@
+Nice — I got you. Below is a single **drop-in builder prompt** you can paste straight into any UI-builder (Framer AI, Builder.io, Replit, v0.dev, Uizard, etc.) to **generate the full registration UX** for ProjectLiberty — from microsite → signup → committee selection → portfolio upload → pay now / pay later flows → confirmation / reminders — including organizer-side views and all UI states. It's frontend-only, uses mock data/local state, simulates email/payment behaviour, and includes all edge cases you described (3-day hold, delegate affairs contact, ability to edit portfolio, waitlists, capacity checks).
+
+Copy-paste this whole block into your builder’s “product spec” or “prompt” field and run it.
+
+---
+
+# 🔧 BUILDER PROMPT — PROJECTLIBERTY: COMPLETE REGISTRATION FLOW (FRONTEND ONLY)
+
+**System role**
+You are a senior frontend product engineer and UX designer. Build the **entire registration workflow** (frontend-only) for ProjectLiberty, the Model UN platform. This flow must be fully interactive with mock data and simulate realistic states (loading, success, error). Do **not** implement a backend — simulate server calls with delays and local state.
+
+**Scope**
+
+* Microsite: “Register now” → multi-step registration UI
+* One-time user profile capture (on first registration) — required fields in a single form
+* Event-level registration: committee selection, country preference, short committee-specific portfolio (position paper snippet) and optional uploads
+* Payment flow: **Pay now** (simulate quick success/failure) OR **Pay later** with 3-day hold (reserve seat, send payment link, reminder emails)
+* Post-registration states: Pending, Confirmed, Waitlisted, Rejected, Withdrawn
+* Delegate support: Contact Delegate Affairs modal, “Ask for extension”, “Change portfolio” flows
+* Organizer UI (mock) to view registrations, approve/decline, send payment reminders, and manage waitlist
+* Email / notification previews for key steps (registration confirmation, pay-later link, reminders, assignment, rejection)
+* All forms have validation, helpful microcopy, and clear CTAs
+
+**Design constraints**
+
+* Use existing ProjectLiberty design tokens (Liberty Blue #0072CE, gold #FFD700, Inter font).
+* Use rectangular buttons (no pills).
+* Responsive: Desktop-first, mobile collapse.
+* Use local JSON mock-data (events.json, committees.json, users.json, registrations.json). Provide example entries.
+
+---
+
+## UX SPEC — USER JOURNEY (High level)
+
+1. User opens MUN microsite page → clicks **Register**.
+2. If not signed in, open **Sign up / Quick profile capture** modal — single form captures required basic details. Save to local state.
+3. After profile saved, show **Event Registration** modal / page with multi-step flow:
+
+   * Step 1: Confirm basic profile (readonly, with edit link)
+   * Step 2: Committee selection (choose committee, show capacity, remaining seats) + country preferences (ranked)
+   * Step 3: Committee portfolio (short text box: 300–500 chars summary + optional position paper upload PDF)
+   * Step 4: Payment options (Pay now / Pay later / Invoice request). Show price, taxes, promo code.
+   * Step 5: Review & Submit
+4. On Submit: if Pay Now → simulate payment modal; on success show Confirmed. If Pay Later → create **3-day hold** (seat reserved) and show **Pending (Pay Later)** with payment link and expiry countdown. Send simulated email/notification preview.
+5. Allow **post-registration actions**: Edit portfolio (until deadline/organizer locks), Withdraw, Contact Delegate Affairs (modal prefilled), Pay Now (if previously Pay Later), View status.
+6. Organizer dashboard (UI-only): show new registration queue — Approve/Reject, mark Paid, send reminders, promote from waitlist if seat freed.
+7. Edge cases: seat taken during signup → show conflict dialog with options (join waitlist, try another committee, contact organizer). If organizer reduces capacity → UI shows conflict list and mock resolution flow.
+
+---
+
+## DETAILED UI REQUIREMENTS
+
+### A. Microsite / Register CTA
+
+* **Register** button visible top-right on microsite page and above fold on Overview tab.
+* Clicking opens sign-in modal if unauthenticated, otherwise goes straight to registration flow.
+* Button states: Enabled / Disabled (if registration closed) / Loading.
+
+### B. One-Time Quick Profile Capture (modal)
+
+**Purpose:** collect user’s baseline info **once** on first registration (all fields required).
+**Fields (single-page form):**
+
+* Full name (text)
+* Email (validated)
+* Country (dropdown, searchable)
+* City (text)
+* Institution/School (autocomplete from mock institutions + “Independent” option)
+* Grade/Year (text)
+* Phone (optional)
+* Short bio (1–2 lines)
+* Experience level (radio: Beginner / Intermediate / Advanced)
+* Accept code of conduct checkbox (required)
+
+**UX behavior:**
+
+* Validate email format; show helpful errors.
+* “Save & Continue” stores to local user state and closes modal.
+* If profile already exists, show compact “Confirm your details” preview step instead of the full form.
+
+### C. Registration Multi-step Flow (Event-level)
+
+**Global UI:** Stepper at top (Profile → Committee → Portfolio → Payment → Review)
+
+#### Step 1 — Confirm Profile
+
+* Readonly view of profile fields with “Edit” (opens profile modal).
+* Show event-specific notes: registration open/close dates, fees, deadlines.
+* CTA: Next
+
+#### Step 2 — Committee Selection & Country Preference
+
+* Show committee list (cards) with: Committee name, short agenda, assigned chairs (small avatars), capacity (seats total / filled), difficulty level (Beginner/Advanced), and "Select" CTA.
+* On selecting committee, show **country preference modal**: allow ranking 3 preferences with searchable country dropdowns. Add helper text: “We’ll try to allocate your top choice — rank 1–3.”
+* Display live capacity: if seats remaining == 0 → show **Join Waitlist** CTA instead of Select.
+* If online event: allow selecting virtual-only or in-person (if hybrid).
+* Validate selection: require committee selection to proceed.
+
+**Edge behavior:**
+
+* If committee gets filled in the background (simulate with a mock 2s race), show conflict dialog and offer waitlist or choose another committee.
+
+#### Step 3 — Committee Portfolio (per-event)
+
+* Minimal portfolio required inline: one short text area (300–500 chars) titled **“Committee Pitch / Position Summary”**. Microcopy: “Summarize your approach to this committee in 3–4 sentences.”
+* Optional file upload: Position Paper (PDF up to 10MB) and supporting documents. Show drag-drop, progress bar, and preview.
+* Allow saving as Draft and Continue Later.
+* Show whether organizer requires position paper — if required, mark field mandatory.
+
+#### Step 4 — Payment Options
+
+* Show price breakdown: Registration fee, discounts (promo code), taxes, total.
+* Payment options:
+
+  1. **Pay Now** — Simulate card payment modal: allow success and failure states. On success mark **Confirmed (Paid)**.
+  2. **Pay Later (3-day hold)** — Reserve seat for 72 hours. Show timer countdown (days/hours/mins). Generate a unique mock payment link and simulate email preview (contains link and expiry). Registration status: **Pending (Payment Due)**.
+  3. **Invoice / Bank Transfer** — open a form to request invoice (Name on invoice, Billing address). Mark status **Pending (Invoice)**. Organizer must mark paid in organizer view (UI-only).
+* “Pay Later” action: store reservation in local registrations.json with expiry timestamp. Also add a reminder notification scheduled (simulate) at 48 hours and 24 hours pre-expiry.
+* “Pay Now” actions show simulated spinner, outcome, and toast notifications.
+
+**Edge cases:** If payment fails, allow retry and show actionable error messages. If Pay Later expires, seat auto-releases (simulate) and user notified.
+
+#### Step 5 — Review & Submit
+
+* Show summary card of all choices (Profile, Committee, Country, Portfolio, Payment option).
+* Edit buttons for each section.
+* Final confirm button: Submit Registration.
+* On submit show animated success screen with status and next steps (download invoice, contact delegate affairs, add to calendar).
+
+---
+
+### D. Post-Registration Dashboard & Actions (Delegate)
+
+**Status states (UI):**
+
+* **Confirmed (Paid)** — shows Certificate ETA, calendar links, documents, ability to edit non-critical info until lock date.
+* **Pending (Payment Due)** — shows countdown to expiry, Pay Now button, link to payment email, ability to request a 2-day extension (contacts Delegate Affairs).
+* **Waitlisted** — shows position on waitlist (#X), option to remain on waitlist or withdraw.
+* **Rejected** — shows reason and appeal contact.
+* **Withdrawn** — shows re-registration link.
+
+**Delegate actions:**
+
+* **Edit Portfolio** (allowed up to organizer-specified deadline)
+* **Pay Now** (if pending)
+* **Contact Delegate Affairs** — opens a prefilled message modal to organizer/delegate-affairs email with subject and body templates.
+* **Invite Teammates** (if event allows team entries) — send mock invites and show acceptance state.
+* **Download Registration Receipt/PDF** — simulated download.
+
+**Notifications & Email previews:**
+
+* Registration confirmation email (on Confirmed or Pending).
+* Pay-later email with link and expiry.
+* Reminder emails at 48h and 8h before expiry.
+* Waitlist promotion email (if seat opens).
+* All emails rendered as preview modals in the UI.
+
+---
+
+### E. Organizer View (UI-only)
+
+**Registration Queue UI:**
+
+* Table of registrations with columns: Name, Committee, Country Pref, Status (Pending/Confirmed/Waitlist), Payment method, Actions (Approve / Reject / Mark Paid / Send Reminder).
+* Organizer can:
+
+  * **Approve** pending registrations (overrides pay-later hold if needed)
+  * **Reject** with reason (triggers rejection email preview)
+  * **Manually mark Paid** for bank transfer/invoice.
+  * **Promote** waitlisted delegates if seat freed.
+  * **Send Payment Reminder** (open small composer with mock send).
+
+**Waitlist automation button:** “Auto-promote 1 seat” → organizer approves promotions.
+
+**Conflict resolution UI:** if capacity reduces, show conflict list and quick actions (Reassign / Waitlist / Refund). (All simulated)
+
+---
+
+### F. Edge Cases & Business Rules (must be simulated)
+
+* **Concurrency race:** simulate scenario where two users attempt last seat — implement conflict modal offering options.
+* **Pay Later expiry:** when 72h passes (simulate with accelerated clock in prototype), release seat and update status of affected users.
+* **Editing portfolio after submission:** allowed until organizer lock date; editing triggers "Updated portfolio" notification to chairs.
+* **Duplicate accounts:** if same email tries to register twice, show merge prompt showing both profiles and allow merging (visual only).
+* **Promo codes:** simulate 1-2 promo codes (e.g., PLFREE50 → 50% off; STUDENT10 for students). Invalid codes show friendly error.
+* **Late registration:** if user attempts to register after registration close time, show “Late Registration” modal: allow organizer override request via contact form.
+
+---
+
+## MOCK DATA (minimal skeleton — builder should generate these files)
+
+**events.json**
+
+```json
+[{
+  "id":"mun-global-2026",
+  "title":"Global Youth Summit MUN 2026",
+  "host":"International Youth Foundation",
+  "type":"online",
+  "startDate":"2026-03-15T09:00:00Z",
+  "endDate":"2026-03-17T18:00:00Z",
+  "registrationOpen":"2026-02-01T00:00:00Z",
+  "registrationClose":"2026-03-10T23:59:59Z",
+  "fee":25,
+  "currency":"USD",
+  "committees":["c1","c2","c3"],
+  "delegateAffairsEmail":"delegates@globalmun.org"
+}]
+```
+
+**committees.json**
+
+```json
+[{
+  "id":"c1",
+  "mun_id":"mun-global-2026",
+  "name":"UNSC",
+  "capacity":30,
+  "filled":28,
+  "requiresPaper":true
+}]
+```
+
+**users.json** (example signed-up user)
+
+```json
+[{
+  "id":"u1",
+  "name":"Aarav Mehta",
+  "email":"aarav@example.com",
+  "country":"India",
+  "institution":"St. Xavier's School",
+  "experience":"Intermediate"
+}]
+```
+
+**registrations.json** (updated live in mock)
+
+```json
+[{
+  "id":"r1",
+  "userId":"u1",
+  "munId":"mun-global-2026",
+  "committeeId":"c1",
+  "countryPreference":["India","France","Germany"],
+  "portfolioText":"I will push for equitable climate finance by...",
+  "positionPaperUrl":"mock://uploads/paper1.pdf",
+  "status":"pending_payment",
+  "paymentMethod":"pay_later",
+  "holdExpiresAt":"2026-03-05T12:00:00Z"
+}]
+```
+
+---
+
+## ACCEPTANCE CRITERIA (what to demo)
+
+* Clicking **Register** on microsite triggers sign-up modal if unauthenticated.
+* One-shot profile capture saves and pre-fills future registrations.
+* Committee selection UI shows capacity, handles last-seat race, and offers waitlist.
+* Portfolio upload accepts PDF, shows progress and preview.
+* Payment flow supports **Pay Now** and **Pay Later (3-day hold)**; Pay Later shows countdown, sends mock email, and allows Pay Now later.
+* Delegate dashboard shows correct registration status and actionable buttons.
+* Organizer UI shows registration queue, can mark paid, send reminders, and promote waitlist.
+* Simulated emails/notifications for each critical step (preview modal).
+* All flows use mock data and show skeleton loaders / success toasts.
+
+---
+
+## MISC UX NOTES / MICROCOPY
+
+* Position paper helper: “Max 10MB PDF. Prefer 1–2 pages.”
+* Payment hold microcopy: “Reserve your seat now — checkout within 72 hours or your seat will be released.”
+* Country preference microcopy: “Rank 1–3 — we’ll try to place you in the highest available choice.”
+* Waitlist microcopy: “You’re #3 on the waitlist. We’ll notify you if a seat opens.”
+* Delegate Affairs contact modal prefill: Subject = “Registration help — [Event]” Body: “Hi, I’d like help with…”
+
+---
+
+## VISUAL & INTERACTION REQUIREMENTS
+
+* Use rectangular CTAs and consistent spacing.
+* Use subtle transitions for modal open/close and step changes (150–200ms).
+* Use clear color-coded status chips: Green=Confirmed, Amber=Pending, Gray=Waitlisted, Red=Rejected.
+* Use accessible labels, aria attributes for upload and countdown timer.
+
+---
+
+## DELIVERABLES (what the builder should produce)
+
+* Fully navigable registration prototype with the above flows (no backend).
+* Mock-data files and a `useMockRegistrations` hook simulating async API calls (use `setTimeout` for delays).
+* Email/notification preview modals.
+* Organizer and delegate UI panels for registration management.
+* README with instructions to change mock-data (ttl of pay-later holds) for demoing expiry race.
+
+---
+
+Paste the above prompt into your AI UI-builder. If the builder asks for a “framework”, choose **React + Tailwind** (or the builder default).
+If you want, I’ll next produce the **mock JSON files** (full 15–50 entries) and the explicit **component skeletons** (`RegisterModal.jsx`, `ProfileCaptureForm.jsx`, `CommitteeSelector.jsx`, `PortfolioUploader.jsx`, `PaymentChooser.jsx`, `OrganizerQueue.jsx`) so the builder can drop them into a repo.

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "mun-global-2026",
+    "title": "Global Youth Summit MUN 2026",
+    "host": "International Youth Foundation",
+    "type": "online",
+    "startDate": "2026-03-15T09:00:00Z",
+    "endDate": "2026-03-17T18:00:00Z",
+    "registrationOpen": "2025-11-01T00:00:00Z",
+    "registrationClose": "2026-03-10T23:59:59Z",
+    "fee": 25,
+    "currency": "USD",
+    "committees": ["c1", "c2", "c3", "c4", "c5"],
+    "delegateAffairsEmail": "delegates@globalmun.org",
+    "allowsTeams": false,
+    "portfolioDeadline": "2026-03-12T23:59:59Z"
+  },
+  {
+    "id": "summit-asia-2026",
+    "title": "Asia Pacific MUN Summit 2026",
+    "host": "APAC Youth Forum",
+    "type": "hybrid",
+    "startDate": "2026-05-20T09:00:00Z",
+    "endDate": "2026-05-22T18:00:00Z",
+    "registrationOpen": "2025-11-15T00:00:00Z",
+    "registrationClose": "2026-05-15T23:59:59Z",
+    "fee": 35,
+    "currency": "USD",
+    "committees": ["c6", "c7", "c8"],
+    "delegateAffairsEmail": "info@apacmun.org",
+    "allowsTeams": true,
+    "portfolioDeadline": "2026-05-18T23:59:59Z"
+  }
+]
