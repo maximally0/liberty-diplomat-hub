@@ -1,107 +1,93 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Globe, Menu, User, Search, ChevronDown } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Globe, Menu, User, Trophy, BookOpen, LayoutDashboard, Search, Wifi, WifiOff } from "lucide-react";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { NotificationsCenter } from "./NotificationsCenter";
 
 export const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [eventMode, setEventMode] = useState<'all' | 'online' | 'offline'>('all');
+  const [isOnlineMode, setIsOnlineMode] = useState(true);
 
   const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
-    { path: "/browse", label: "Browse MUNs" },
-    { path: "/leaderboard", label: "Leaderboard" },
-    { path: "/resources", label: "Resources" },
-    { path: "/dashboard", label: "Dashboard" },
+    { path: "/browse", label: "Browse MUNs", icon: Search },
+    { path: "/leaderboard", label: "Leaderboard", icon: Trophy },
+    { path: "/resources", label: "Resources", icon: BookOpen },
+    { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
+    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
-        <div className="flex h-[60px] items-center justify-between gap-6">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-              <Globe className="h-5 w-5" />
+          <Link to="/" className="flex items-center space-x-2 group">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-105">
+              <Globe className="h-6 w-6" />
             </div>
-            <span className="font-semibold text-lg text-foreground">
+            <span className="font-display text-xl font-bold text-foreground">
               ProjectLiberty
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link key={link.path} to={link.path}>
-                <button
-                  className={`px-3 py-2 text-[15px] font-medium transition-colors ${
-                    isActive(link.path)
-                      ? 'text-primary border-b-2 border-primary'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link key={link.path} to={link.path}>
+                  <Button
+                    variant={isActive(link.path) ? "secondary" : "ghost"}
+                    className="gap-2"
+                  >
+                    <Icon className="h-4 w-4" />
+                    {link.label}
+                  </Button>
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Right side */}
-          <div className="hidden md:flex items-center gap-3 ml-auto">
-            {/* Event Mode Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-1 text-sm font-medium">
-                  {eventMode === 'all' ? 'All Events' : eventMode === 'online' ? 'Online' : 'Offline'}
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setEventMode('all')}>
-                  All Events
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setEventMode('online')}>
-                  Online Only
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setEventMode('offline')}>
-                  Offline Only
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Search Bar */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search MUNs..."
-                className="w-[200px] pl-9 h-9 bg-muted border-0"
-              />
-            </div>
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-2">
+            {/* Online/Offline Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsOnlineMode(!isOnlineMode)}
+              className="gap-2"
+            >
+              {isOnlineMode ? (
+                <>
+                  <Wifi className="h-4 w-4 text-green-500" />
+                  <span>Online</span>
+                </>
+              ) : (
+                <>
+                  <WifiOff className="h-4 w-4 text-orange-500" />
+                  <span>Offline</span>
+                </>
+              )}
+            </Button>
 
             <NotificationsCenter />
 
             <Link to="/auth">
-              <Button variant="ghost" size="sm" className="text-sm font-medium">
+              <Button variant="ghost" className="gap-2">
+                <User className="h-4 w-4" />
                 Sign In
               </Button>
             </Link>
             <Link to="/auth">
-              <Button size="sm" className="text-sm font-medium">
+              <Button className="gap-2">
                 Get Started
               </Button>
             </Link>
@@ -116,30 +102,24 @@ export const Navigation = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
               <div className="flex flex-col space-y-4 mt-8">
-                <div className="relative mb-4">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search MUNs..."
-                    className="pl-9 bg-muted border-0"
-                  />
-                </div>
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <button
-                      className={`w-full text-left px-3 py-2 text-sm font-medium rounded-md ${
-                        isActive(link.path)
-                          ? 'bg-secondary text-primary'
-                          : 'hover:bg-muted'
-                      }`}
+                {navLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
                     >
-                      {link.label}
-                    </button>
-                  </Link>
-                ))}
+                      <Button
+                        variant={isActive(link.path) ? "secondary" : "ghost"}
+                        className="w-full justify-start gap-2"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {link.label}
+                      </Button>
+                    </Link>
+                  );
+                })}
                 <div className="pt-4 border-t">
                   <Link to="/auth" onClick={() => setIsOpen(false)}>
                     <Button variant="outline" className="w-full mb-2">

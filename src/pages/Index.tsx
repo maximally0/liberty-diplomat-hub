@@ -1,115 +1,145 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { MUNCard } from "@/components/MUNCard";
 import { Navigation } from "@/components/Navigation";
 import { 
+  Globe, 
+  Users, 
+  Award, 
+  Building2, 
   Search,
-  Clock,
-  TrendingUp,
-  Trophy,
-  Globe,
   ArrowRight,
-  ChevronRight
+  Sparkles,
+  Shield,
+  Trophy
 } from "lucide-react";
-import { mockMUNs, mockBadges } from "@/lib/mockData";
+import { mockMUNs, mockStats } from "@/lib/mockData";
 
 const Index = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const filterOptions = [
-    { id: "all", label: "All" },
-    { id: "online", label: "Online" },
-    { id: "offline", label: "Offline" },
-    { id: "hybrid", label: "Hybrid" },
-    { id: "free", label: "Free" },
-    { id: "closing-soon", label: "Closing Soon" },
-  ];
-
-  const featuredMUNs = mockMUNs.filter(m => m.isFeatured).slice(0, 6);
-  const closingSoon = mockMUNs.slice(0, 4);
-  const newAndPopular = mockMUNs.slice(3, 9);
-
-  const topDelegates = [
-    { rank: 1, name: 'Sarah Chen', institution: 'Oxford University', xp: 8950, awards: 12 },
-    { rank: 2, name: 'Marcus Johnson', institution: 'Harvard University', xp: 8420, awards: 11 },
-    { rank: 3, name: 'Priya Sharma', institution: 'NUS', xp: 8180, awards: 10 },
-    { rank: 4, name: 'Emma Watson', institution: 'Cambridge', xp: 7650, awards: 9 },
-    { rank: 5, name: 'Alex Rivera', institution: 'CIS Madrid', xp: 7420, awards: 8 },
-  ];
-
-  const institutions = [
-    { name: 'Harvard', logo: '🏛️' },
-    { name: 'Oxford', logo: '🎓' },
-    { name: 'Stanford', logo: '🌉' },
-    { name: 'Cambridge', logo: '📚' },
-    { name: 'NUS', logo: '🦁' },
-    { name: 'Sciences Po', logo: '🗼' },
-  ];
+  const featuredMUNs = mockMUNs.filter(mun => mun.isFeatured).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Search Hero - Minimal */}
-      <section className="border-b bg-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-semibold text-foreground mb-2 text-center">
-              Find Model UNs around the world
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 liberty-gradient opacity-5" />
+        <div className="container mx-auto px-4 py-20 relative">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Host or Join Model UNs — Globally</span>
+            </div>
+            
+            <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-foreground">
+              The Future of
+              <span className="text-primary"> Diplomatic Education</span>
             </h1>
-            <p className="text-sm text-muted-foreground mb-6 text-center">
-              Search by city, institution, or format
+            
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Discover, host, and participate in Model United Nations conferences worldwide. 
+              Connect with delegates, manage events, and build your diplomatic portfolio.
             </p>
 
-            {/* Large Search Bar */}
-            <div className="relative mb-6">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input
-                placeholder="Search MUNs by name, city, or host..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-12 text-base border-2"
-              />
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  placeholder="Find MUNs by city, format, or topic..."
+                  className="pl-12 h-14 text-lg bg-card border-2"
+                />
+              </div>
             </div>
 
-            {/* Filter Chips */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              {filterOptions.map((filter) => (
-                <button
-                  key={filter.id}
-                  onClick={() => setActiveFilter(filter.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeFilter === filter.id
-                      ? 'bg-primary text-white'
-                      : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                  }`}
-                >
-                  {filter.label}
-                </button>
-              ))}
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Link to="/browse">
+                <Button size="lg" className="gap-2 h-12 px-8">
+                  <Search className="h-5 w-5" />
+                  Browse MUNs
+                </Button>
+              </Link>
+              <Link to="/auth">
+                <Button size="lg" variant="outline" className="gap-2 h-12 px-8">
+                  <Users className="h-5 w-5" />
+                  Join as Delegate
+                </Button>
+              </Link>
+              <Link to="/auth">
+                <Button size="lg" variant="outline" className="gap-2 h-12 px-8">
+                  <Globe className="h-5 w-5" />
+                  Host a MUN
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="border-b border-border bg-muted/30">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center animate-slide-up">
+              <div className="flex justify-center mb-2">
+                <Globe className="h-8 w-8 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">
+                {mockStats.totalMUNs.toLocaleString()}
+              </div>
+              <div className="text-sm text-muted-foreground">Total MUNs</div>
+            </div>
+            <div className="text-center animate-slide-up" style={{ animationDelay: '0.1s' }}>
+              <div className="flex justify-center mb-2">
+                <Users className="h-8 w-8 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">
+                {mockStats.totalDelegates.toLocaleString()}
+              </div>
+              <div className="text-sm text-muted-foreground">Active Delegates</div>
+            </div>
+            <div className="text-center animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              <div className="flex justify-center mb-2">
+                <Building2 className="h-8 w-8 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">
+                {mockStats.totalInstitutions}
+              </div>
+              <div className="text-sm text-muted-foreground">Institutions</div>
+            </div>
+            <div className="text-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
+              <div className="flex justify-center mb-2">
+                <Award className="h-8 w-8 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">
+                {mockStats.countriesRepresented}
+              </div>
+              <div className="text-sm text-muted-foreground">Countries</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured MUNs */}
-      <section className="py-12 border-b">
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">Featured MUNs</h2>
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="font-display text-3xl font-bold mb-2">Featured Events</h2>
+              <p className="text-muted-foreground">Handpicked MUNs happening soon</p>
+            </div>
             <Link to="/browse">
-              <Button variant="ghost" size="sm" className="gap-1">
+              <Button variant="outline" className="gap-2">
                 View All
-                <ChevronRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredMUNs.map((mun) => (
               <MUNCard key={mun.id} mun={mun} />
             ))}
@@ -117,164 +147,126 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Closing Soon - Horizontal Scroll */}
-      <section className="py-12 bg-muted/30 border-b">
+      {/* Features Section */}
+      <section className="py-16 bg-muted/30 border-y border-border">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 mb-6">
-            <Clock className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-semibold">Closing Soon</h2>
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl font-bold mb-4">Why ProjectLiberty?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              A complete MUN operating system built for diplomacy, structure, and recognition
+            </p>
           </div>
 
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-            {closingSoon.map((mun) => (
-              <div key={mun.id} className="min-w-[320px] flex-shrink-0">
-                <div className="liberty-card p-5 h-full">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="text-3xl">{mun.logo}</div>
-                    <Badge variant="destructive" className="text-xs">
-                      3 days left
-                    </Badge>
-                  </div>
-                  <h3 className="font-semibold mb-2 line-clamp-2">{mun.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{mun.host}</p>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    <Badge variant="outline" className="text-xs">{mun.format}</Badge>
-                    {mun.isFree && <Badge variant="secondary" className="text-xs">Free</Badge>}
-                  </div>
-                  <Link to={`/mun/${mun.id}`}>
-                    <Button size="sm" className="w-full">View Details</Button>
-                  </Link>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="liberty-card text-center p-8">
+              <div className="flex justify-center mb-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <Shield className="h-8 w-8 text-primary" />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* New & Popular */}
-      <section className="py-12 border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 mb-6">
-            <TrendingUp className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-semibold">New & Popular</h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {newAndPopular.map((mun) => (
-              <MUNCard key={mun.id} mun={mun} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Leaderboard Snapshot */}
-      <section className="py-12 bg-muted/30 border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-accent" />
-              <h2 className="text-2xl font-semibold">Leaderboard</h2>
+              <h3 className="font-display text-xl font-semibold mb-2">Verified Events</h3>
+              <p className="text-muted-foreground">
+                All MUNs are verified by institutions. Secure registration and payment processing.
+              </p>
             </div>
-            <Link to="/leaderboard">
-              <Button variant="ghost" size="sm" className="gap-1">
-                View Full Leaderboard
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
 
-          <div className="liberty-card overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-muted/50 border-b">
-                <tr>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Rank</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Name</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Institution</th>
-                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">XP</th>
-                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Awards</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {topDelegates.map((delegate) => (
-                  <tr key={delegate.rank} className="hover:bg-muted/30 transition-colors">
-                    <td className="py-3 px-4">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-semibold text-sm">
-                        {delegate.rank}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 font-medium">{delegate.name}</td>
-                    <td className="py-3 px-4 text-sm text-muted-foreground">{delegate.institution}</td>
-                    <td className="py-3 px-4 text-right font-semibold">{delegate.xp.toLocaleString()}</td>
-                    <td className="py-3 px-4 text-right">
-                      <Badge variant="outline" className="text-xs">{delegate.awards}</Badge>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="liberty-card text-center p-8">
+              <div className="flex justify-center mb-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <Trophy className="h-8 w-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="font-display text-xl font-semibold mb-2">Digital Certificates</h3>
+              <p className="text-muted-foreground">
+                Earn verified certificates and awards. Build your diplomatic portfolio with every event.
+              </p>
+            </div>
+
+            <div className="liberty-card text-center p-8">
+              <div className="flex justify-center mb-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <Globe className="h-8 w-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="font-display text-xl font-semibold mb-2">Global Network</h3>
+              <p className="text-muted-foreground">
+                Connect with delegates and institutions from 78 countries. Join a growing community.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Institution Logos */}
-      <section className="py-8 border-b bg-white">
+      {/* CTA Section */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <p className="text-sm text-muted-foreground text-center mb-6">
-            Top Institutions Hosting on ProjectLiberty
-          </p>
-          <div className="flex items-center justify-center gap-8 flex-wrap grayscale opacity-60">
-            {institutions.map((inst) => (
-              <div key={inst.name} className="flex flex-col items-center gap-1">
-                <div className="text-4xl">{inst.logo}</div>
-                <div className="text-xs font-medium">{inst.name}</div>
+          <div className="max-w-3xl mx-auto text-center liberty-card p-12 relative overflow-hidden">
+            <div className="absolute inset-0 liberty-gradient opacity-5" />
+            <div className="relative">
+              <h2 className="font-display text-3xl font-bold mb-4">
+                Ready to Start Your Diplomatic Journey?
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Join thousands of delegates and organizers using ProjectLiberty to host and participate in MUNs worldwide.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/auth">
+                  <Button size="lg" className="gap-2">
+                    Get Started Free
+                    <ArrowRight className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="/browse">
+                  <Button size="lg" variant="outline">
+                    Explore Events
+                  </Button>
+                </Link>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-muted/30 border-t">
+      <footer className="border-t border-border bg-muted/30">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-semibold mb-4 text-sm">Platform</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/browse" className="hover:text-foreground">Browse MUNs</Link></li>
-                <li><Link to="/leaderboard" className="hover:text-foreground">Leaderboard</Link></li>
-                <li><Link to="/resources" className="hover:text-foreground">Resources</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-sm">Support</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground">Help Center</a></li>
-                <li><a href="#" className="hover:text-foreground">Contact</a></li>
-                <li><a href="#" className="hover:text-foreground">Guidelines</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-sm">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground">About</a></li>
-                <li><a href="#" className="hover:text-foreground">Partners</a></li>
-                <li><a href="#" className="hover:text-foreground">Careers</a></li>
-              </ul>
-            </div>
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Globe className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-sm">ProjectLiberty</span>
+                <Globe className="h-6 w-6 text-primary" />
+                <span className="font-display text-lg font-bold">ProjectLiberty</span>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Built for the world's next generation of diplomats
+              <p className="text-sm text-muted-foreground">
+                The global platform for Model United Nations conferences.
               </p>
             </div>
+            <div>
+              <h4 className="font-semibold mb-4">Platform</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link to="/browse" className="hover:text-primary">Browse MUNs</Link></li>
+                <li><Link to="/leaderboard" className="hover:text-primary">Leaderboard</Link></li>
+                <li><Link to="/resources" className="hover:text-primary">Resources</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-primary">Help Center</a></li>
+                <li><a href="#" className="hover:text-primary">Contact Us</a></li>
+                <li><a href="#" className="hover:text-primary">Guidelines</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-primary">About</a></li>
+                <li><a href="#" className="hover:text-primary">Partners</a></li>
+                <li><a href="#" className="hover:text-primary">Careers</a></li>
+              </ul>
+            </div>
           </div>
-          <div className="pt-6 border-t text-center">
-            <p className="text-xs text-muted-foreground">
-              © 2025 ProjectLiberty · All rights reserved
-            </p>
+          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
+            <p>© 2025 ProjectLiberty. All rights reserved.</p>
           </div>
         </div>
       </footer>
