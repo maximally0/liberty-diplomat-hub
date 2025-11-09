@@ -19,7 +19,12 @@ export function log(message: string) {
 
 export async function setupVite(app: Express): Promise<Express> {
   const vite = await createViteServer({
-    server: { middlewareMode: true },
+    server: { 
+      middlewareMode: true,
+      hmr: {
+        host: "0.0.0.0",
+      },
+    },
     appType: "spa",
   });
 
