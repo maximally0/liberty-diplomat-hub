@@ -9,7 +9,7 @@ import { CountryMatrix } from "@/components/CountryMatrix";
 import { AnnouncementsFeed } from "@/components/AnnouncementsFeed";
 import { RegistrationWizard } from "@/components/registration/RegistrationWizard";
 import { ProfileCaptureModal } from "@/components/registration/ProfileCaptureModal";
-import { useRegistration } from "@/hooks/useRegistration";
+import { useRegistration } from "@/contexts/RegistrationContext";
 import { 
   Calendar, 
   MapPin, 

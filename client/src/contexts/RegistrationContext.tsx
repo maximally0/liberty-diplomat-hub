@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
   id: string;
@@ -15,7 +15,23 @@ interface Registration {
   [key: string]: any;
 }
 
-export function useRegistration() {
+interface RegistrationContextType {
+  currentUser: User | null;
+  registrations: Registration[];
+  saveUser: (userData: User) => void;
+  addRegistration: (registration: Registration) => void;
+  getUserRegistration: (munId: string) => Registration | null;
+  getAllRegistrations: () => Registration[];
+  getUserRegistrations: () => Registration[];
+  updateRegistrationStatus: (registrationId: string, status: string, reason?: string) => void;
+  assignCountry: (registrationId: string, country: string) => void;
+  withdrawRegistration: (registrationId: string) => void;
+  recordPayment: (registrationId: string, amount: number) => void;
+}
+
+const RegistrationContext = createContext<RegistrationContextType | undefined>(undefined);
+
+export function RegistrationProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [registrations, setRegistrations] = useState<Registration[]>([]);
 
@@ -44,7 +60,7 @@ export function useRegistration() {
 
   const getUserRegistration = (munId: string) => {
     if (!currentUser) return null;
-    return registrations.find(r => r.userId === currentUser.id && r.munId === munId);
+    return registrations.find(r => r.userId === currentUser.id && r.munId === munId) || null;
   };
 
   const getAllRegistrations = () => {
@@ -108,17 +124,31 @@ export function useRegistration() {
     localStorage.setItem('registrations', JSON.stringify(updatedRegistrations));
   };
 
-  return {
-    currentUser,
-    registrations,
-    saveUser,
-    addRegistration,
-    getUserRegistration,
-    getAllRegistrations,
-    getUserRegistrations,
-    updateRegistrationStatus,
-    assignCountry,
-    withdrawRegistration,
-    recordPayment,
-  };
+  return (
+    <RegistrationContext.Provider
+      value={{
+        currentUser,
+        registrations,
+        saveUser,
+        addRegistration,
+        getUserRegistration,
+        getAllRegistrations,
+        getUserRegistrations,
+        updateRegistrationStatus,
+        assignCountry,
+        withdrawRegistration,
+        recordPayment,
+      }}
+    >
+      {children}
+    </RegistrationContext.Provider>
+  );
+}
+
+export function useRegistration() {
+  const context = useContext(RegistrationContext);
+  if (context === undefined) {
+    throw new Error('useRegistration must be used within a RegistrationProvider');
+  }
+  return context;
 }

@@ -1,4 +1,4 @@
-import { useRegistration } from "@/hooks/useRegistration";
+import { useRegistration } from "@/contexts/RegistrationContext";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
