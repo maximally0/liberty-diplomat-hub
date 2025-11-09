@@ -1,16 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Globe, Menu, User, Trophy, BookOpen, LayoutDashboard, Search } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Globe, Menu, User, Trophy, BookOpen, LayoutDashboard, Search, Wifi, WifiOff } from "lucide-react";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState } from "react";
+import { NotificationsCenter } from "./NotificationsCenter";
 
 export const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOnlineMode, setIsOnlineMode] = useState(true);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -55,6 +58,28 @@ export const Navigation = () => {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-2">
+            {/* Online/Offline Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsOnlineMode(!isOnlineMode)}
+              className="gap-2"
+            >
+              {isOnlineMode ? (
+                <>
+                  <Wifi className="h-4 w-4 text-green-500" />
+                  <span>Online</span>
+                </>
+              ) : (
+                <>
+                  <WifiOff className="h-4 w-4 text-orange-500" />
+                  <span>Offline</span>
+                </>
+              )}
+            </Button>
+
+            <NotificationsCenter />
+
             <Link to="/auth">
               <Button variant="ghost" className="gap-2">
                 <User className="h-4 w-4" />

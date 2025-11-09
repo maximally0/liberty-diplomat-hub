@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import { CountryMatrix } from "@/components/CountryMatrix";
+import { AnnouncementsFeed } from "@/components/AnnouncementsFeed";
 import { 
   Calendar, 
   MapPin, 
@@ -132,8 +134,10 @@ const MUNEvent = () => {
               <TabsList className="w-full justify-start overflow-x-auto">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="committees">Committees</TabsTrigger>
+                <TabsTrigger value="countries">Country Matrix</TabsTrigger>
                 <TabsTrigger value="delegates">Delegates</TabsTrigger>
                 <TabsTrigger value="documents">Documents</TabsTrigger>
+                <TabsTrigger value="announcements">Announcements</TabsTrigger>
                 <TabsTrigger value="results">Results</TabsTrigger>
               </TabsList>
 
@@ -248,6 +252,10 @@ const MUNEvent = () => {
                 )}
               </TabsContent>
 
+              <TabsContent value="countries" className="space-y-4">
+                <CountryMatrix isOrganizer={true} />
+              </TabsContent>
+
               <TabsContent value="delegates" className="space-y-4">
                 {eventDelegates.length > 0 ? (
                   <Card className="p-6">
@@ -288,6 +296,10 @@ const MUNEvent = () => {
                     Documents will be available after registration
                   </p>
                 </Card>
+              </TabsContent>
+
+              <TabsContent value="announcements">
+                <AnnouncementsFeed isOrganizer={true} />
               </TabsContent>
 
               <TabsContent value="results">

@@ -11,19 +11,20 @@ import {
   Users,
   Building2
 } from "lucide-react";
+import { mockBadges } from "@/lib/mockData";
 
 const Leaderboard = () => {
   const topDelegates = [
-    { rank: 1, name: 'Sarah Chen', institution: 'Oxford University', country: 'United Kingdom', xp: 8950, badges: 24, change: 0 },
-    { rank: 2, name: 'Marcus Johnson', institution: 'Harvard University', country: 'United States', xp: 8420, badges: 22, change: 1 },
-    { rank: 3, name: 'Priya Sharma', institution: 'National University of Singapore', country: 'Singapore', xp: 8180, badges: 21, change: -1 },
-    { rank: 4, name: 'Emma Watson', institution: 'Cambridge University', country: 'United Kingdom', xp: 7650, badges: 19, change: 2 },
-    { rank: 5, name: 'Alex Rivera', institution: 'Cambridge International School', country: 'Spain', xp: 7420, badges: 18, change: 0 },
-    { rank: 6, name: 'Yuki Tanaka', institution: 'Tokyo International School', country: 'Japan', xp: 7250, badges: 17, change: -2 },
-    { rank: 7, name: 'Olga Petrov', institution: 'Moscow State University', country: 'Russia', xp: 7100, badges: 16, change: 1 },
-    { rank: 8, name: 'Ahmed Hassan', institution: 'American University Cairo', country: 'Egypt', xp: 6890, badges: 15, change: 0 },
-    { rank: 9, name: 'Sophie Martin', institution: 'Sciences Po Paris', country: 'France', xp: 6720, badges: 14, change: 3 },
-    { rank: 10, name: 'Carlos Silva', institution: 'University of São Paulo', country: 'Brazil', xp: 6550, badges: 14, change: -1 },
+    { rank: 1, name: 'Sarah Chen', institution: 'Oxford University', country: 'United Kingdom', xp: 8950, badges: mockBadges.filter(b => b.unlocked).length, change: 0 },
+    { rank: 2, name: 'Marcus Johnson', institution: 'Harvard University', country: 'United States', xp: 8420, badges: mockBadges.filter(b => b.unlocked).length - 2, change: 1 },
+    { rank: 3, name: 'Priya Sharma', institution: 'National University of Singapore', country: 'Singapore', xp: 8180, badges: mockBadges.filter(b => b.unlocked).length - 3, change: -1 },
+    { rank: 4, name: 'Emma Watson', institution: 'Cambridge University', country: 'United Kingdom', xp: 7650, badges: mockBadges.filter(b => b.unlocked).length - 5, change: 2 },
+    { rank: 5, name: 'Alex Rivera', institution: 'Cambridge International School', country: 'Spain', xp: 7420, badges: mockBadges.filter(b => b.unlocked).length - 6, change: 0 },
+    { rank: 6, name: 'Yuki Tanaka', institution: 'Tokyo International School', country: 'Japan', xp: 7250, badges: mockBadges.filter(b => b.unlocked).length - 7, change: -2 },
+    { rank: 7, name: 'Olga Petrov', institution: 'Moscow State University', country: 'Russia', xp: 7100, badges: mockBadges.filter(b => b.unlocked).length - 8, change: 1 },
+    { rank: 8, name: 'Ahmed Hassan', institution: 'American University Cairo', country: 'Egypt', xp: 6890, badges: mockBadges.filter(b => b.unlocked).length - 9, change: 0 },
+    { rank: 9, name: 'Sophie Martin', institution: 'Sciences Po Paris', country: 'France', xp: 6720, badges: mockBadges.filter(b => b.unlocked).length - 10, change: 3 },
+    { rank: 10, name: 'Carlos Silva', institution: 'University of São Paulo', country: 'Brazil', xp: 6550, badges: mockBadges.filter(b => b.unlocked).length - 10, change: -1 },
   ];
 
   const topInstitutions = [
@@ -89,7 +90,7 @@ const Leaderboard = () => {
                 const heights = ['md:order-2', 'md:order-1', 'md:order-3'];
                 const scales = ['scale-105', 'scale-100', 'scale-100'];
                 return (
-                  <Card key={delegate.rank} className={`p-6 text-center ${heights[idx]} ${scales[idx]}`}>
+                  <Card key={delegate.rank} className={`p-6 text-center ${heights[idx]} ${scales[idx]} transition-all hover:shadow-lg animate-fade-in`} style={{ animationDelay: `${idx * 100}ms` }}>
                     <div className="flex justify-center mb-3">
                       {getRankIcon(delegate.rank)}
                     </div>
@@ -115,7 +116,7 @@ const Leaderboard = () => {
               </div>
               <div className="divide-y divide-border">
                 {topDelegates.map((delegate) => (
-                  <div key={delegate.rank} className="p-4 hover:bg-muted/50 transition-colors">
+                  <div key={delegate.rank} className="p-4 hover:bg-muted/50 transition-all hover:shadow-sm animate-fade-in" style={{ animationDelay: `${delegate.rank * 50}ms` }}>
                     <div className="flex items-center gap-4">
                       <div className="flex w-12 justify-center">
                         {getRankIcon(delegate.rank)}
@@ -133,7 +134,10 @@ const Leaderboard = () => {
                       </div>
                       <div className="text-right">
                         <div className="font-bold text-lg mb-1">{delegate.xp.toLocaleString()}</div>
-                        <div className="text-xs text-muted-foreground">{delegate.badges} badges</div>
+                        <div className="flex items-center justify-end gap-1 text-xs text-muted-foreground">
+                          <Medal className="h-3 w-3 text-accent" />
+                          {delegate.badges} badges
+                        </div>
                       </div>
                       <div className="w-8">
                         {getTrendIcon(delegate.change)}

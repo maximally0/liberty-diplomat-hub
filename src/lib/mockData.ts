@@ -53,6 +53,73 @@ export interface Award {
   country: string;
 }
 
+export interface Badge {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  unlocked: boolean;
+  unlockedDate?: string;
+}
+
+export interface Announcement {
+  id: string;
+  title: string;
+  message: string;
+  author: string;
+  authorRole: 'Organizer' | 'Chair';
+  timestamp: string;
+  munId: string;
+  committee?: string;
+  isRead: boolean;
+}
+
+export interface PositionPaper {
+  id: string;
+  delegateId: string;
+  delegateName: string;
+  munId: string;
+  committee: string;
+  country: string;
+  fileName: string;
+  status: 'Draft' | 'Submitted' | 'Under Review' | 'Feedback Received';
+  uploadDate: string;
+  feedback?: string;
+  rating?: number;
+}
+
+export interface Certificate {
+  id: string;
+  delegateId: string;
+  delegateName: string;
+  munId: string;
+  munName: string;
+  award: string;
+  committee: string;
+  date: string;
+  template: 'classic' | 'modern' | 'gold-leaf';
+}
+
+export interface Country {
+  id: string;
+  name: string;
+  code: string;
+  flag: string;
+  status: 'available' | 'filled' | 'waitlisted' | 'reserved';
+  delegateId?: string;
+  delegateName?: string;
+}
+
+export interface Notification {
+  id: string;
+  type: 'announcement' | 'feedback' | 'award' | 'registration';
+  title: string;
+  message: string;
+  timestamp: string;
+  isRead: boolean;
+  link?: string;
+}
+
 export const mockMUNs: MUN[] = [
   {
     id: '1',
@@ -256,3 +323,120 @@ export const mockStats = {
   totalInstitutions: 312,
   countriesRepresented: 78
 };
+
+export const mockBadges: Badge[] = [
+  { id: 'b1', name: 'First MUN', icon: '🎯', description: 'Attended your first MUN', unlocked: true, unlockedDate: '2024-01-15' },
+  { id: 'b2', name: 'Best Delegate', icon: '🏆', description: 'Won Best Delegate award', unlocked: true, unlockedDate: '2024-03-20' },
+  { id: 'b3', name: 'Veteran Diplomat', icon: '⭐', description: 'Attended 5 MUNs', unlocked: true, unlockedDate: '2024-06-10' },
+  { id: 'b4', name: 'Global Speaker', icon: '🌍', description: 'Participated in international MUN', unlocked: true, unlockedDate: '2024-09-05' },
+  { id: 'b5', name: 'Chair Certified', icon: '👨‍⚖️', description: 'Served as committee chair', unlocked: false },
+  { id: 'b6', name: 'Crisis Master', icon: '⚡', description: 'Excelled in crisis committee', unlocked: false },
+];
+
+export const mockAnnouncements: Announcement[] = [
+  {
+    id: 'a1',
+    title: 'Opening Ceremony Schedule',
+    message: 'The opening ceremony will begin at 9:00 AM sharp. Please arrive 30 minutes early for registration.',
+    author: 'Sarah Chen',
+    authorRole: 'Organizer',
+    timestamp: new Date(Date.now() - 3600000).toISOString(),
+    munId: '1',
+    isRead: false
+  },
+  {
+    id: 'a2',
+    title: 'Background Guide Available',
+    message: 'The background guide for UNSC has been uploaded. Please review before the first session.',
+    author: 'Marcus Johnson',
+    authorRole: 'Chair',
+    timestamp: new Date(Date.now() - 7200000).toISOString(),
+    munId: '1',
+    committee: 'UNSC',
+    isRead: true
+  }
+];
+
+export const mockPositionPapers: PositionPaper[] = [
+  {
+    id: 'pp1',
+    delegateId: 'd1',
+    delegateName: 'Alex Rivera',
+    munId: '1',
+    committee: 'UNSC',
+    country: 'United Kingdom',
+    fileName: 'UK_UNSC_Position_Paper.pdf',
+    status: 'Feedback Received',
+    uploadDate: '2024-12-01',
+    feedback: 'Excellent research and clear arguments. Consider adding more historical context.',
+    rating: 4.5
+  }
+];
+
+export const mockCertificates: Certificate[] = [
+  {
+    id: 'cert1',
+    delegateId: 'd1',
+    delegateName: 'Alex Rivera',
+    munId: '2',
+    munName: 'Harvard WorldMUN 2024',
+    award: 'Best Delegate',
+    committee: 'UNSC',
+    date: '2024-11-20',
+    template: 'gold-leaf'
+  },
+  {
+    id: 'cert2',
+    delegateId: 'd1',
+    delegateName: 'Alex Rivera',
+    munId: '3',
+    munName: 'Singapore Youth MUN',
+    award: 'Outstanding Delegate',
+    committee: 'WHO',
+    date: '2024-09-15',
+    template: 'modern'
+  }
+];
+
+export const mockCountries: Country[] = [
+  { id: 'c1', name: 'United States', code: 'US', flag: '🇺🇸', status: 'filled', delegateId: 'd1', delegateName: 'Alex Rivera' },
+  { id: 'c2', name: 'China', code: 'CN', flag: '🇨🇳', status: 'filled', delegateId: 'd2', delegateName: 'Priya Sharma' },
+  { id: 'c3', name: 'Russia', code: 'RU', flag: '🇷🇺', status: 'available' },
+  { id: 'c4', name: 'United Kingdom', code: 'GB', flag: '🇬🇧', status: 'reserved' },
+  { id: 'c5', name: 'France', code: 'FR', flag: '🇫🇷', status: 'available' },
+  { id: 'c6', name: 'Germany', code: 'DE', flag: '🇩🇪', status: 'waitlisted' },
+  { id: 'c7', name: 'Japan', code: 'JP', flag: '🇯🇵', status: 'available' },
+  { id: 'c8', name: 'India', code: 'IN', flag: '🇮🇳', status: 'available' },
+  { id: 'c9', name: 'Brazil', code: 'BR', flag: '🇧🇷', status: 'available' },
+  { id: 'c10', name: 'South Africa', code: 'ZA', flag: '🇿🇦', status: 'available' },
+];
+
+export const mockNotifications: Notification[] = [
+  {
+    id: 'n1',
+    type: 'announcement',
+    title: 'New Announcement',
+    message: 'Opening ceremony schedule posted',
+    timestamp: new Date(Date.now() - 3600000).toISOString(),
+    isRead: false,
+    link: '/mun/1'
+  },
+  {
+    id: 'n2',
+    type: 'feedback',
+    title: 'Position Paper Feedback',
+    message: 'Your paper has received feedback from the chair',
+    timestamp: new Date(Date.now() - 7200000).toISOString(),
+    isRead: false,
+    link: '/dashboard'
+  },
+  {
+    id: 'n3',
+    type: 'award',
+    title: 'Certificate Available',
+    message: 'Your certificate for Harvard WorldMUN is ready',
+    timestamp: new Date(Date.now() - 86400000).toISOString(),
+    isRead: true,
+    link: '/dashboard'
+  }
+];

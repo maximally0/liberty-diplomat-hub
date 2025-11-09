@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { CertificateVault } from "@/components/CertificateVault";
+import { PositionPaperUpload } from "@/components/PositionPaperUpload";
 import { 
   Award, 
   Calendar, 
@@ -16,6 +18,7 @@ import {
   Target,
   Zap
 } from "lucide-react";
+import { mockBadges } from "@/lib/mockData";
 
 const Dashboard = () => {
   const mockUserData = {
@@ -28,12 +31,7 @@ const Dashboard = () => {
     awardsWon: 8,
     committees: ['UNSC', 'WHO', 'UNHRC', 'ECOSOC'],
     streak: 5,
-    badges: [
-      { name: 'First MUN', icon: '🎯', date: '2024-01-15' },
-      { name: 'Best Delegate', icon: '🏆', date: '2024-03-20' },
-      { name: '5 MUNs', icon: '⭐', date: '2024-06-10' },
-      { name: 'Global Participant', icon: '🌍', date: '2024-09-05' }
-    ]
+    badges: mockBadges.filter(b => b.unlocked)
   };
 
   const upcomingMUNs = [
@@ -136,6 +134,8 @@ const Dashboard = () => {
                 <TabsTrigger value="upcoming">Upcoming MUNs</TabsTrigger>
                 <TabsTrigger value="past">Past Events</TabsTrigger>
                 <TabsTrigger value="certificates">Certificates</TabsTrigger>
+                <TabsTrigger value="papers">Position Papers</TabsTrigger>
+                <TabsTrigger value="analytics">Analytics</TabsTrigger>
               </TabsList>
 
               <TabsContent value="upcoming" className="space-y-4">
@@ -194,36 +194,106 @@ const Dashboard = () => {
               </TabsContent>
 
               <TabsContent value="certificates" className="space-y-4">
-                {certificates.map((cert) => (
-                  <Card key={cert.id} className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Award className="h-5 w-5 text-accent" />
-                          <Badge className="liberty-badge-gold">{cert.award}</Badge>
-                        </div>
-                        <h3 className="font-display text-lg font-semibold mb-1">
-                          {cert.event}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-1">
-                          {cert.committee} • {new Date(cert.date).toLocaleDateString()}
-                        </p>
+                <CertificateVault />
+              </TabsContent>
+
+              <TabsContent value="papers">
+                <PositionPaperUpload />
+              </TabsContent>
+
+              <TabsContent value="analytics" className="space-y-6">
+                {/* Participation Heatmap */}
+                <Card className="p-6">
+                  <h3 className="font-display text-xl font-semibold mb-4">Participation Timeline</h3>
+                  <div className="grid grid-cols-12 gap-2">
+                    {Array.from({ length: 52 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className={`h-8 rounded ${
+                          i % 4 === 0 ? 'bg-primary/80' : i % 3 === 0 ? 'bg-primary/40' : 'bg-muted'
+                        }`}
+                        title={`Week ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex justify-between mt-4 text-xs text-muted-foreground">
+                    <span>Jan</span>
+                    <span>Mar</span>
+                    <span>Jun</span>
+                    <span>Sep</span>
+                    <span>Dec</span>
+                  </div>
+                </Card>
+
+                {/* Awards Breakdown */}
+                <Card className="p-6">
+                  <h3 className="font-display text-xl font-semibold mb-4">Awards by Type</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="flex items-center gap-2">
+                          <Trophy className="h-4 w-4 text-accent" />
+                          Best Delegate
+                        </span>
+                        <span className="font-medium">3</span>
                       </div>
-                      <Button variant="outline" size="sm" className="gap-2">
-                        <Download className="h-4 w-4" />
-                        Download
-                      </Button>
+                      <Progress value={60} className="h-2" />
                     </div>
-                    <div className="border border-border rounded-lg p-4 bg-muted/30">
-                      <div className="text-center">
-                        <div className="text-4xl mb-2">🏆</div>
-                        <div className="text-xs text-muted-foreground">
-                          Certificate Preview
-                        </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="flex items-center gap-2">
+                          <Award className="h-4 w-4 text-primary" />
+                          Outstanding Delegate
+                        </span>
+                        <span className="font-medium">3</span>
                       </div>
+                      <Progress value={60} className="h-2" />
                     </div>
-                  </Card>
-                ))}
+                    <div>
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="flex items-center gap-2">
+                          <Badge className="h-4 w-4" />
+                          High Commendation
+                        </span>
+                        <span className="font-medium">2</span>
+                      </div>
+                      <Progress value={40} className="h-2" />
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Committee Experience */}
+                <Card className="p-6">
+                  <h3 className="font-display text-xl font-semibold mb-4">Committees Attended</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {['UNSC', 'WHO', 'UNHRC', 'ECOSOC'].map((committee) => (
+                      <div key={committee} className="p-4 rounded-lg bg-muted/50 text-center">
+                        <div className="text-2xl font-bold mb-1">
+                          {Math.floor(Math.random() * 5) + 2}
+                        </div>
+                        <div className="text-sm text-muted-foreground">{committee}</div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+
+                {/* Best Performance */}
+                <Card className="p-6 bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground text-2xl">
+                      🏆
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg font-semibold mb-1">
+                        Best MUN Performance
+                      </h3>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        Harvard WorldMUN 2024 • UNSC
+                      </p>
+                      <Badge className="liberty-badge-gold">Best Delegate</Badge>
+                    </div>
+                  </div>
+                </Card>
               </TabsContent>
             </Tabs>
 
@@ -272,10 +342,25 @@ const Dashboard = () => {
                 {mockUserData.badges.map((badge) => (
                   <div
                     key={badge.name}
-                    className="flex flex-col items-center p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+                    className="flex flex-col items-center p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors cursor-pointer group"
                   >
-                    <div className="text-3xl mb-2">{badge.icon}</div>
+                    <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
+                      {badge.icon}
+                    </div>
                     <div className="text-xs font-medium text-center">{badge.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {new Date(badge.unlockedDate!).toLocaleDateString()}
+                    </div>
+                  </div>
+                ))}
+                {mockBadges.filter(b => !b.unlocked).slice(0, 2).map((badge) => (
+                  <div
+                    key={badge.name}
+                    className="flex flex-col items-center p-3 rounded-lg bg-muted/30 opacity-50"
+                  >
+                    <div className="text-3xl mb-2 grayscale">{badge.icon}</div>
+                    <div className="text-xs font-medium text-center">{badge.name}</div>
+                    <div className="text-xs text-muted-foreground">Locked</div>
                   </div>
                 ))}
               </div>
