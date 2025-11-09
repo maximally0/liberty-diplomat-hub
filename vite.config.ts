@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "0.0.0.0",
     strictPort: false,
+    allowedHosts: true,
   },
   preview: {
     host: "0.0.0.0",
