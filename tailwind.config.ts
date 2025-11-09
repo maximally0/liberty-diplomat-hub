@@ -53,10 +53,18 @@ export default {
           dark: "hsl(var(--liberty-dark))",
           light: "hsl(var(--liberty-light))",
         },
+        noir: {
+          black: "#0A0A0A",
+          gold: "#D4AF37",
+          crimson: "#8B3A3A",
+          gray: "#2A2A2A",
+          lightgray: "#4A4A4A",
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Cinzel', 'serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -110,6 +118,32 @@ export default {
             transform: "scale(1)"
           }
         },
+        "fade-in-slow": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(30px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)"
+          }
+        },
+        "spotlight": {
+          "0%, 100%": {
+            opacity: "0.3"
+          },
+          "50%": {
+            opacity: "0.6"
+          }
+        },
+        "parallax": {
+          "0%": {
+            transform: "translateY(0)"
+          },
+          "100%": {
+            transform: "translateY(-20px)"
+          }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +151,9 @@ export default {
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.5s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
+        "fade-in-slow": "fade-in-slow 1.2s ease-out",
+        "spotlight": "spotlight 4s ease-in-out infinite",
+        "parallax": "parallax 0.5s ease-out",
       },
     },
   },
