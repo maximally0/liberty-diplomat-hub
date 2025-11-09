@@ -120,6 +120,19 @@ export interface Notification {
   link?: string;
 }
 
+export interface LandingPageEvent {
+  id: string;
+  name: string;
+  location: string;
+  dates: string;
+  description: string;
+  format: 'online' | 'offline';
+  tags: string[];
+  badgeText: string;
+  badgeBgClass: string;
+  badgeTextClass: string;
+}
+
 export const mockMUNs: MUN[] = [
   {
     id: '1',
@@ -438,5 +451,122 @@ export const mockNotifications: Notification[] = [
     timestamp: new Date(Date.now() - 86400000).toISOString(),
     isRead: true,
     link: '/dashboard'
+  }
+];
+
+export const featuredMUNs: LandingPageEvent[] = [
+  {
+    id: '1',
+    name: 'Harvard WorldMUN 2025',
+    location: 'Cambridge, MA',
+    dates: 'Mar 15-18',
+    description: "The world's most prestigious international MUN conference with 2000+ delegates",
+    format: 'offline',
+    tags: ['Offline', '15 Committees'],
+    badgeText: '⭐ FEATURED',
+    badgeBgClass: 'bg-gradient-to-r from-playful-yellow to-playful-orange',
+    badgeTextClass: 'text-white'
+  },
+  {
+    id: '2',
+    name: 'THIMUN Singapore 2025',
+    location: 'Singapore',
+    dates: 'Jan 25-29',
+    description: "Asia's largest student-run MUN conference with international delegates",
+    format: 'offline',
+    tags: ['Offline', '12 Committees'],
+    badgeText: '⭐ FEATURED',
+    badgeBgClass: 'bg-gradient-to-r from-playful-yellow to-playful-orange',
+    badgeTextClass: 'text-white'
+  },
+  {
+    id: '3',
+    name: 'CIMUN XXV',
+    location: 'Chicago, IL',
+    dates: 'Feb 10-12',
+    description: 'College-level conference hosted by University of Chicago',
+    format: 'offline',
+    tags: ['Offline', '8 Committees'],
+    badgeText: '⭐ FEATURED',
+    badgeBgClass: 'bg-gradient-to-r from-playful-yellow to-playful-orange',
+    badgeTextClass: 'text-white'
+  }
+];
+
+export const offlineMUNs: LandingPageEvent[] = [
+  {
+    id: '4',
+    name: 'NYU MUN Conference',
+    location: 'New York, NY',
+    dates: 'Dec 8-10',
+    description: 'Beginner-friendly conference perfect for first-timers',
+    format: 'offline',
+    tags: ['Beginner Friendly'],
+    badgeText: '📍 NEAR YOU',
+    badgeBgClass: 'bg-playful-cyan/20',
+    badgeTextClass: 'text-playful-cyan'
+  },
+  {
+    id: '5',
+    name: 'UCLA BruinMUN',
+    location: 'Los Angeles, CA',
+    dates: 'Jan 20-22',
+    description: 'High school conference with specialized crisis committees',
+    format: 'offline',
+    tags: ['Crisis'],
+    badgeText: '📍 NEAR YOU',
+    badgeBgClass: 'bg-playful-cyan/20',
+    badgeTextClass: 'text-playful-cyan'
+  },
+  {
+    id: '6',
+    name: 'Boston MUN Summit',
+    location: 'Boston, MA',
+    dates: 'Feb 5-7',
+    description: 'Regional conference for New England delegates',
+    format: 'offline',
+    tags: ['Regional'],
+    badgeText: '📍 NEAR YOU',
+    badgeBgClass: 'bg-playful-cyan/20',
+    badgeTextClass: 'text-playful-cyan'
+  }
+];
+
+export const onlineMUNs: LandingPageEvent[] = [
+  {
+    id: '7',
+    name: 'Global Youth MUN Online',
+    location: 'Virtual',
+    dates: 'Dec 15-16',
+    description: 'Free online conference for students worldwide',
+    format: 'online',
+    tags: ['FREE'],
+    badgeText: '💻 ONLINE',
+    badgeBgClass: 'bg-playful-mint/40',
+    badgeTextClass: 'text-playful-lime'
+  },
+  {
+    id: '8',
+    name: 'Virtual ECOSOC Conference',
+    location: 'Virtual',
+    dates: 'Jan 12-13',
+    description: 'Specialized conference focusing on economic & social issues',
+    format: 'online',
+    tags: ['Specialized'],
+    badgeText: '💻 ONLINE',
+    badgeBgClass: 'bg-playful-mint/40',
+    badgeTextClass: 'text-playful-lime'
+  },
+  {
+    id: '9',
+    name: 'International Crisis Summit',
+    location: 'Virtual',
+    dates: 'Feb 18-19',
+    description: 'Fast-paced crisis simulation with real-time updates',
+    format: 'online',
+    tags: ['Crisis'],
+    badgeText: '💻 ONLINE',
+    badgeBgClass: 'bg-playful-mint/40',
+    badgeTextClass: 'text-playful-lime'
   }
 ];

@@ -14,10 +14,11 @@ import {
   Heart,
   Star
 } from "lucide-react";
-import { mockStats } from "@/lib/mockData";
+import { mockStats, featuredMUNs, offlineMUNs, onlineMUNs } from "@/lib/mockData";
 import { useEffect, useState } from "react";
 import { FloatingBlobs } from "@/components/FloatingBlobs";
 import { CursorTrail } from "@/components/CursorTrail";
+import { EventCard } from "@/components/EventCard";
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -46,7 +47,7 @@ const Index = () => {
               <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-playful-purple/20 to-playful-pink/20 backdrop-blur-lg border-2 border-playful-purple/30 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
                 <Sparkles className="h-5 w-5 text-playful-purple animate-wiggle" />
                 <span className="text-sm font-bold tracking-wide bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent">
-                  70+ Countries · 1000+ Active Delegates
+                  Find Your Next MUN Conference
                 </span>
                 <Star className="h-4 w-4 text-playful-pink animate-pulse" />
               </div>
@@ -54,24 +55,17 @@ const Index = () => {
             
             {/* Main Headline with Gradient */}
             <h1 className="font-display text-6xl md:text-8xl font-extrabold mb-8 leading-tight">
-              <span className="block bg-gradient-to-r from-playful-purple via-playful-pink to-playful-blue bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
-                Welcome to
-              </span>
-              <span className="block text-7xl md:text-9xl bg-gradient-to-r from-playful-cyan via-playful-blue to-playful-purple bg-clip-text text-transparent mt-4 animate-gradient-x bg-[length:200%_auto] drop-shadow-2xl">
-                LIBERTY
+              <span className="block text-7xl md:text-9xl bg-gradient-to-r from-playful-cyan via-playful-blue to-playful-purple bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto] drop-shadow-2xl">
+                Discover MUNs
               </span>
               <span className="block text-4xl md:text-6xl mt-6 bg-gradient-to-r from-playful-orange via-playful-yellow to-playful-lime bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
-                Where Ideas Come Alive
+                Near You & Online
               </span>
             </h1>
             
             {/* Subtitle */}
             <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
-              Join thousands of delegates from around the world in the most vibrant MUN platform. 
-              <br />
-              <span className="bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent font-bold">
-                Let's make diplomacy fun again!
-              </span>
+              Browse hundreds of Model UN conferences worldwide
             </p>
 
             {/* CTA Buttons with 3D effect */}
@@ -82,7 +76,7 @@ const Index = () => {
                   className="relative group bg-gradient-to-r from-playful-purple to-playful-pink text-white hover:shadow-2xl h-16 px-12 text-lg font-bold rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1 shadow-lg overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Explore Events
+                    Browse All MUNs
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-playful-pink to-playful-purple opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -94,8 +88,8 @@ const Index = () => {
                   className="relative group bg-white text-playful-purple hover:shadow-2xl h-16 px-12 text-lg font-bold rounded-full border-4 border-playful-purple/30 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:border-playful-pink/50"
                 >
                   <span className="flex items-center gap-2 bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent">
-                    Join the Fun
-                    <Heart className="h-5 w-5 text-playful-pink group-hover:animate-bounce-soft" />
+                    Host Your MUN
+                    <Sparkles className="h-5 w-5 text-playful-pink group-hover:animate-bounce-soft" />
                   </span>
                 </Button>
               </Link>
@@ -126,17 +120,17 @@ const Index = () => {
             <div className="text-center group cursor-default">
               <div className="bg-gradient-to-br from-playful-purple to-playful-pink p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-rotate-2">
                 <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
-                  {mockStats.totalMUNs}
+                  {mockStats.totalMUNs}+
                 </div>
                 <div className="text-sm text-white/90 font-semibold tracking-wide">
-                  Events
+                  MUN Events
                 </div>
               </div>
             </div>
             <div className="text-center group cursor-default">
               <div className="bg-gradient-to-br from-playful-cyan to-playful-blue p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-2">
                 <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
-                  {mockStats.totalDelegates.toLocaleString()}
+                  {mockStats.totalDelegates.toLocaleString()}+
                 </div>
                 <div className="text-sm text-white/90 font-semibold tracking-wide">
                   Delegates
@@ -146,23 +140,112 @@ const Index = () => {
             <div className="text-center group cursor-default">
               <div className="bg-gradient-to-br from-playful-yellow to-playful-orange p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-rotate-2">
                 <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
-                  {mockStats.totalInstitutions}
+                  {mockStats.totalInstitutions}+
                 </div>
                 <div className="text-sm text-white/90 font-semibold tracking-wide">
-                  Institutions
+                  Schools
                 </div>
               </div>
             </div>
             <div className="text-center group cursor-default">
               <div className="bg-gradient-to-br from-playful-mint to-playful-lime p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-2">
                 <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
-                  {mockStats.countriesRepresented}
+                  {mockStats.countriesRepresented}+
                 </div>
                 <div className="text-sm text-white/90 font-semibold tracking-wide">
-                  Nations
+                  Countries
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Event Discovery Sections */}
+      {/* Featured MUNs */}
+      <section className="relative py-20 bg-gradient-to-b from-white to-playful-lavender/20">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent mb-2">
+                Featured MUNs
+              </h2>
+              <p className="text-gray-600 font-medium">Top conferences happening soon</p>
+            </div>
+            <Link to="/browse" className="text-playful-purple font-bold hover:text-playful-pink transition-colors">
+              View All →
+            </Link>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {featuredMUNs.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                gradientFrom="from-playful-purple"
+                gradientTo="to-playful-pink"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Offline Near You MUNs */}
+      <section className="relative py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-playful-cyan to-playful-blue bg-clip-text text-transparent mb-2">
+                Offline Near You
+              </h2>
+              <p className="text-gray-600 font-medium">MUN conferences in your area</p>
+            </div>
+            <Link to="/browse?format=offline" className="text-playful-cyan font-bold hover:text-playful-blue transition-colors">
+              View All →
+            </Link>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {offlineMUNs.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                gradientFrom="from-playful-cyan"
+                gradientTo="to-playful-blue"
+                buttonText="Register Now"
+                borderColor="border-playful-cyan/20"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Online MUNs */}
+      <section className="relative py-20 bg-gradient-to-b from-playful-lavender/20 to-white">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-playful-lime to-playful-mint bg-clip-text text-transparent mb-2">
+                Online MUNs
+              </h2>
+              <p className="text-gray-600 font-medium">Join from anywhere in the world</p>
+            </div>
+            <Link to="/browse?format=online" className="text-playful-lime font-bold hover:text-playful-mint transition-colors">
+              View All →
+            </Link>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {onlineMUNs.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                gradientFrom="from-playful-lime"
+                gradientTo="to-playful-mint"
+                buttonText={event.tags.includes('FREE') ? 'Join Free' : 'Register'}
+                borderColor="border-playful-lime/20"
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -172,10 +255,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="font-display text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-playful-purple via-playful-pink to-playful-blue bg-clip-text text-transparent">
-              Why You'll Love It Here
+              Why Choose Liberty?
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg font-medium">
-              Three amazing features that make Liberty special
+              Everything you need to find and join MUN conferences
             </p>
           </div>
 
@@ -188,44 +271,44 @@ const Index = () => {
                   <Shield className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="font-display text-2xl font-bold mb-4 text-gray-800">
-                  Verified Events
+                  Verified MUNs
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Every event is carefully vetted and authentic. Join with confidence knowing you're in the right place!
+                  All conferences are verified and authentic. No fake events, just real MUN conferences.
                 </p>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-playful-purple to-playful-pink transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl" />
             </div>
 
-            {/* Card 2 - Achievements */}
+            {/* Card 2 - Easy Search */}
             <div className="group relative overflow-hidden rounded-3xl bg-white p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-playful-cyan/20 to-playful-blue/20 rounded-full blur-2xl transition-all duration-500 group-hover:scale-150"></div>
               <div className="relative z-10">
                 <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-playful-cyan to-playful-blue shadow-lg mb-6 group-hover:animate-bounce-soft">
-                  <Trophy className="h-10 w-10 text-white" />
+                  <Building2 className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="font-display text-2xl font-bold mb-4 text-gray-800">
-                  Digital Achievements
+                  Easy Search
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Earn badges, collect honors, and showcase your diplomatic excellence to the world!
+                  Filter by location, date, format, and level. Find the perfect MUN for you in seconds.
                 </p>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-playful-cyan to-playful-blue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl" />
             </div>
 
-            {/* Card 3 - Global Community */}
+            {/* Card 3 - Quick Register */}
             <div className="group relative overflow-hidden rounded-3xl bg-white p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:rotate-1">
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-playful-yellow/20 to-playful-orange/20 rounded-full blur-2xl transition-all duration-500 group-hover:scale-150"></div>
               <div className="relative z-10">
                 <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-playful-yellow to-playful-orange shadow-lg mb-6 group-hover:animate-bounce-soft">
-                  <Globe className="h-10 w-10 text-white" />
+                  <Users className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="font-display text-2xl font-bold mb-4 text-gray-800">
-                  Global Community
+                  Quick Registration
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Connect with thousands of delegates from 70+ countries. Make friends, share ideas, grow together!
+                  Register for conferences directly through Liberty. No more emailing back and forth!
                 </p>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-playful-yellow to-playful-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl" />
@@ -251,13 +334,13 @@ const Index = () => {
             </div>
             
             <h2 className="font-display text-5xl md:text-7xl font-extrabold mb-8 text-white leading-tight drop-shadow-2xl">
-              Ready to Start Your
+              Find Your Next
               <br />
-              <span className="text-6xl md:text-8xl">Adventure?</span>
+              <span className="text-6xl md:text-8xl">MUN Conference</span>
             </h2>
             
             <p className="text-xl md:text-2xl text-white/90 mb-12 font-semibold max-w-2xl mx-auto drop-shadow-lg">
-              Join thousands of delegates making a difference. Your voice matters, your ideas count!
+              Start browsing hundreds of MUN conferences worldwide
             </p>
             
             <Link to="/browse">
@@ -266,7 +349,7 @@ const Index = () => {
                 className="relative group bg-white text-playful-purple hover:shadow-2xl h-20 px-16 text-xl font-bold rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-2xl"
               >
                 <span className="relative z-10 flex items-center gap-3">
-                  Let's Go!
+                  Browse MUNs
                   <ArrowRight className="h-6 w-6 group-hover:translate-x-3 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-playful-yellow to-playful-orange opacity-0 group-hover:opacity-20 rounded-full transition-opacity" />
@@ -274,7 +357,7 @@ const Index = () => {
             </Link>
             
             <p className="mt-8 text-white/80 text-sm font-medium">
-              Free to join • No credit card required • Start in seconds
+              Free to browse • Hundreds of events • Updated daily
             </p>
           </div>
         </div>

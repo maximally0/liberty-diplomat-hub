@@ -61,13 +61,15 @@ export const Navigation = () => {
   ];
 
   return (
-    <nav className={`sticky top-0 z-50 w-full bg-white border-b border-[#E5E7EB] transition-shadow ${hasScrolled ? "shadow-[0_1px_4px_rgba(0,0,0,0.05)]" : ""}`}>
+    <nav className={`sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b-2 border-playful-lavender transition-all ${hasScrolled ? "shadow-lg" : ""}`}>
       <div className="container mx-auto px-4">
-        <div className="flex h-[60px] items-center justify-between">
+        <div className="flex h-[70px] items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <Globe className="h-5 w-5 text-[#0A0A0A]" />
-            <span className="font-semibold text-[#0A0A0A]">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-playful-purple to-playful-pink group-hover:scale-110 transition-transform">
+              <Globe className="h-5 w-5 text-white" />
+            </div>
+            <span className="font-bold text-xl bg-gradient-to-r from-playful-purple to-playful-pink bg-clip-text text-transparent">
               Liberty
             </span>
           </Link>
@@ -76,14 +78,14 @@ export const Navigation = () => {
           <div className="hidden md:flex items-center space-x-6">
             {/* Browse MUNs Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-[#0A0A0A] font-medium hover:text-[#0072CE] transition-colors text-[15px] outline-none">
+              <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 font-semibold hover:text-playful-purple transition-colors text-[15px] outline-none">
                 Browse MUNs
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-[#E5E7EB] rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] z-[100]">
+              <DropdownMenuContent className="w-56 bg-white border-2 border-playful-lavender rounded-2xl shadow-xl z-[100]">
                 {browseMUNsItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
-                    <Link to={item.path} className="cursor-pointer text-[#0A0A0A] hover:text-[#0072CE] font-normal">
+                    <Link to={item.path} className="cursor-pointer text-gray-700 hover:text-playful-purple hover:bg-playful-lavender/30 font-medium rounded-lg">
                       {item.label}
                     </Link>
                   </DropdownMenuItem>
@@ -93,14 +95,14 @@ export const Navigation = () => {
 
             {/* Host a MUN Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-[#0A0A0A] font-medium hover:text-[#0072CE] transition-colors text-[15px] outline-none">
+              <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 font-semibold hover:text-playful-pink transition-colors text-[15px] outline-none">
                 Host a MUN
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-[#E5E7EB] rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] z-[100]">
+              <DropdownMenuContent className="w-56 bg-white border-2 border-playful-rose rounded-2xl shadow-xl z-[100]">
                 {hostMUNItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
-                    <Link to={item.path} className="cursor-pointer text-[#0A0A0A] hover:text-[#0072CE] font-normal">
+                    <Link to={item.path} className="cursor-pointer text-gray-700 hover:text-playful-pink hover:bg-playful-rose/30 font-medium rounded-lg">
                       {item.label}
                     </Link>
                   </DropdownMenuItem>
@@ -110,14 +112,14 @@ export const Navigation = () => {
 
             {/* Resources Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-[#0A0A0A] font-medium hover:text-[#0072CE] transition-colors text-[15px] outline-none">
+              <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 font-semibold hover:text-playful-blue transition-colors text-[15px] outline-none">
                 Resources
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-[#E5E7EB] rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] z-[100]">
+              <DropdownMenuContent className="w-56 bg-white border-2 border-playful-sky rounded-2xl shadow-xl z-[100]">
                 {resourcesItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
-                    <Link to={item.path} className="cursor-pointer text-[#0A0A0A] hover:text-[#0072CE] font-normal">
+                    <Link to={item.path} className="cursor-pointer text-gray-700 hover:text-playful-blue hover:bg-playful-sky/30 font-medium rounded-lg">
                       {item.label}
                     </Link>
                   </DropdownMenuItem>
@@ -132,8 +134,8 @@ export const Navigation = () => {
             {searchExpanded ? (
               <div className="relative">
                 <Input
-                  placeholder="Search MUNs or institutions…"
-                  className="w-64 h-9 bg-[#F3F4F6] border-[#E5E7EB] rounded-sm"
+                  placeholder="Search MUNs..."
+                  className="w-64 h-10 bg-playful-lavender/30 border-2 border-playful-purple/30 rounded-full font-medium"
                   autoFocus
                   onBlur={() => setSearchExpanded(false)}
                 />
@@ -141,7 +143,7 @@ export const Navigation = () => {
             ) : (
               <button
                 onClick={() => setSearchExpanded(true)}
-                className="text-[#6B7280] hover:text-[#0072CE] transition-colors"
+                className="p-2 rounded-full hover:bg-playful-lavender/40 text-playful-purple transition-all hover:scale-110"
               >
                 <Search className="h-5 w-5" />
               </button>
@@ -149,18 +151,18 @@ export const Navigation = () => {
 
             {/* Notifications */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="text-[#6B7280] hover:text-[#0072CE] transition-colors relative outline-none">
+              <DropdownMenuTrigger className="p-2 rounded-full hover:bg-playful-lavender/40 text-playful-purple transition-all hover:scale-110 relative outline-none">
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full" />
+                <span className="absolute top-1 right-1 h-2 w-2 bg-playful-pink rounded-full animate-pulse" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-72 bg-white border border-[#E5E7EB] rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] z-[100]">
-                <DropdownMenuItem className="text-[#0A0A0A] font-normal">
+              <DropdownMenuContent className="w-72 bg-white border-2 border-playful-lavender rounded-2xl shadow-xl z-[100]">
+                <DropdownMenuItem className="text-gray-700 font-medium">
                   New announcement posted in UNSC
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-[#0A0A0A] font-normal">
+                <DropdownMenuItem className="text-gray-700 font-medium">
                   Position paper feedback received
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-[#0A0A0A] font-normal">
+                <DropdownMenuItem className="text-gray-700 font-medium">
                   New certificate available
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -170,14 +172,14 @@ export const Navigation = () => {
             {isSignedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger className="outline-none">
-                  <div className="h-8 w-8 rounded-full bg-[#E5E7EB] flex items-center justify-center">
-                    <User className="h-4 w-4 text-[#0A0A0A]" />
+                  <div className="h-9 w-9 rounded-full bg-gradient-to-br from-playful-purple to-playful-pink flex items-center justify-center hover:scale-110 transition-transform shadow-md">
+                    <User className="h-5 w-5 text-white" />
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48 bg-white border border-[#E5E7EB] rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] z-[100]">
+                <DropdownMenuContent className="w-48 bg-white border-2 border-playful-lavender rounded-2xl shadow-xl z-[100]">
                   {profileItems.map((item) => (
                     <DropdownMenuItem key={item.label} asChild>
-                      <Link to={item.path} className="cursor-pointer text-[#0A0A0A] hover:text-[#0072CE] font-normal">
+                      <Link to={item.path} className="cursor-pointer text-gray-700 hover:text-playful-purple hover:bg-playful-lavender/30 font-medium rounded-lg">
                         {item.label}
                       </Link>
                     </DropdownMenuItem>
@@ -185,8 +187,10 @@ export const Navigation = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link to="/auth" className="text-[#0A0A0A] hover:text-[#0072CE] font-medium text-[15px] transition-colors">
-                Sign In
+              <Link to="/auth">
+                <Button className="bg-gradient-to-r from-playful-purple to-playful-pink text-white rounded-full font-bold px-6 hover:shadow-lg hover:scale-105 transition-all">
+                  Sign In
+                </Button>
               </Link>
             )}
           </div>
